@@ -31,7 +31,7 @@ class JNIProcessor(ptr: Long, val outputSchema: Schema) extends UnaryOperator[Ve
     rootOut
   }
 
-  @native private def process(ptr: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long], javaExpander: VectorExpander, outBufAddrs: Array[Long], outBufSized: Array[Long]);
+  @native private def process(ptr: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long], javaExpander: VectorExpander, outBufAddrs: Array[Long], outBufSized: Array[Long]): Unit;
 
   @native private def close(ptr: Long): Unit;
 

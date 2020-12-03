@@ -44,6 +44,7 @@ dependencies {
         } else {
             compile "com.google.protobuf:protobuf-java:2.5.0"
         }
+        compile "io.netty:netty-all:4.1.54.Final"
         compile "org.apache.arrow:arrow-memory:$arrowVersion"
         compile "org.apache.arrow:arrow-vector:$arrowVersion"
         compile "org.slf4j:slf4j-api:1.7.25"

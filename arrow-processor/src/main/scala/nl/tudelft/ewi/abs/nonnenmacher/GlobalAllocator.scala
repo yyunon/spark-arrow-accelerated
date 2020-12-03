@@ -33,7 +33,7 @@ object Alignment64BitRoundingPolicy extends RoundingPolicy {
   override def getRoundedSize(requestSize: Long): Long = if (requestSize == 0)
     0
   else
-    DefaultRoundingPolicy.INSTANCE.getRoundedSize(roundUpToMultipleOfChunkSize(requestSize))
+    DefaultRoundingPolicy.DEFAULT_ROUNDING_POLICY.getRoundedSize(roundUpToMultipleOfChunkSize(requestSize))
 
   private def roundUpToMultipleOfChunkSize(size: Long): Long = {
     if (size % memoryCacheAlignment == 0) {

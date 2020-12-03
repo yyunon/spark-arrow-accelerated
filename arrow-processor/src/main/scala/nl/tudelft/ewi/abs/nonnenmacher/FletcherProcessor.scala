@@ -2,7 +2,7 @@ package nl.tudelft.ewi.abs.nonnenmacher
 
 import java.util.logging.Logger
 
-import io.netty.buffer.ArrowBuf
+import org.apache.arrow.memory.ArrowBuf
 import nl.tudelft.ewi.abs.nonnenmacher.utils.ClosableFunction
 import org.apache.arrow.gandiva.evaluator.NativeLibraryLoader
 import org.apache.arrow.gandiva.expression.ArrowTypeHelper
@@ -43,7 +43,7 @@ class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoo
     def close(): Any = recordBatch.close();
 
     lazy val recordBatch: ArrowRecordBatch = new VectorUnloader(root).getRecordBatch
-    lazy val buffers: Seq[ArrowBuf] = recordBatch.getBuffers.asScala
+    lazy val buffers: scala.collection.mutable.Buffer[ArrowBuf] = recordBatch.getBuffers.asScala
     lazy val rowCount: Int = root.getRowCount
     lazy val addresses: Array[Long] = buffers.map(_.memoryAddress()).toArray
     lazy val sizes: Array[Long] = buffers.map(_.readableBytes()).toArray

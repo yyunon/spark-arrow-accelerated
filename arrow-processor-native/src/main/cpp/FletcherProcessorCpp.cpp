@@ -67,7 +67,7 @@ long FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &rec
    ASSERT_FLETCHER_OK(kernel.Start());
 
    // Wait for the kernel to finish.
-   ASSERT_FLETCHER_OK(kernel.WaitForFinish());
+   ASSERT_FLETCHER_OK(kernel.PollUntilDone());
 
    uint32_t return_value_0;
    uint32_t return_value_1;

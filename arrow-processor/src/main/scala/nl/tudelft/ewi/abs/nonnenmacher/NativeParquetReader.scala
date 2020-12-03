@@ -1,7 +1,7 @@
 package nl.tudelft.ewi.abs.nonnenmacher
 
 
-import io.netty.buffer.ArrowBuf
+import org.apache.arrow.memory.ArrowBuf
 import org.apache.arrow.gandiva.evaluator.NativeLibraryLoader
 import org.apache.arrow.gandiva.expression.ArrowTypeHelper
 import org.apache.arrow.vector._

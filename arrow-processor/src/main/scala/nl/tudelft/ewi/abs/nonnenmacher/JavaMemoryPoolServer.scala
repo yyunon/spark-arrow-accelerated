@@ -1,7 +1,8 @@
 package nl.tudelft.ewi.abs.nonnenmacher
 
-import io.netty.buffer.ArrowBuf
-import org.apache.arrow.memory.{BaseAllocator, BufferAllocator}
+import org.apache.arrow.memory.ArrowBuf
+import org.apache.arrow.memory.{BufferAllocator}
+import org.apache.arrow.memory.util.CommonUtil
 
 import scala.collection.mutable
 
@@ -18,7 +19,7 @@ class JavaMemoryPoolServer(val allocator: BufferAllocator) {
       return allocator.getEmpty.memoryAddress();
     }
 
-    val buffer = allocator.buffer(Math.max(BaseAllocator.nextPowerOfTwo(size), minAllocationSize))
+    val buffer = allocator.buffer(Math.max(CommonUtil.nextPowerOfTwo(size), minAllocationSize))
     buffers.put(buffer.memoryAddress, buffer)
     buffer.memoryAddress()
   }
@@ -36,7 +37,7 @@ class JavaMemoryPoolServer(val allocator: BufferAllocator) {
     val newBuffer = if (oldCapacity < newSize) {
 //      println(s"Reallocate called. From $oldCapacity to $newSize")
 
-      val newCapacity = BaseAllocator.nextPowerOfTwo(Math.max(newSize, oldCapacity * 2))
+      val newCapacity = CommonUtil.nextPowerOfTwo(Math.max(newSize, oldCapacity * 2))
 
       val newBuf = allocator.buffer(newCapacity)
       newBuf.setBytes(0, oldBuffer, 0, oldBuffer.capacity())
