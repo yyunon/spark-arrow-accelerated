@@ -28,19 +28,19 @@ DataSetParquetReader::DataSetParquetReader(const std::shared_ptr<arrow::MemoryPo
     // TODO: Support list of files
     const std::string &uri = "file://" +file_name;
     std::shared_ptr<arrow::fs::FileSystem> filesystem = arrow::fs::FileSystemFromUri(uri).ValueOrDie();
-    FileSource source(file_name, filesystem.get());
+    arrow::dataset::FileSource source(file_name, filesystem);
 
     // Parameter for dataset creation
     std::shared_ptr<arrow::dataset::Expression> root_partition = arrow::dataset::scalar(true);
     auto format = std::make_shared<arrow::dataset::ParquetFileFormat>();
     auto file_info = filesystem->GetFileInfo(source.path()).ValueOrDie();
+    std::vector<std::shared_ptr<arrow::dataset::FileFragment> > file_fragment = {format.get()->MakeFragment(source, root_partition).ValueOrDie()};
 
     // Create dataset
     dataset = arrow::dataset::FileSystemDataset::Make(schema_file,
                                                       root_partition,
                                                       format,
-                                                      filesystem,
-                                                      {file_info}).ValueOrDie();
+                                                      file_fragment).ValueOrDie();
 
 
 
