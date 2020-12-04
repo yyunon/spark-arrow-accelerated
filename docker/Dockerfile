@@ -46,7 +46,7 @@ RUN wget -q https://github.com/apache/arrow/archive/apache-arrow-1.0.0.tar.gz &&
         rm -f apache-arrow-1.0.0.tar.gz &&\
         mkdir /arrow/cpp/release &&\
         cd /arrow/cpp/release &&\
-        cmake -DARROW_PARQUET=ON -DARROW_GANDIVA=ON -DARROW_GANDIVA_JAVA=ON -DARROW_DATASET=ON -DARROW_WITH_SNAPPY=ON .. &&\
+        cmake -DARROW_PARQUET=ON -DARROW_GANDIVA=ON -DARROW_GANDIVA_JAVA=ON -DARROW_DATASET=ON -DARROW_CSV=ON -DARROW_WITH_SNAPPY=ON .. &&\
         make &&\
         make install &&\
         cd /arrow/java &&\
