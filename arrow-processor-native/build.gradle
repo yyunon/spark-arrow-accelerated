@@ -69,6 +69,7 @@ library {
         additionalIncludes.each {
             compileTask.get().includes(it)
         }
+        compileTask.get().includes '/home/yyonsel/bulk/project/local/include'
         compileTask.get().includes '/usr/local/include'
 
         compileTask.get().includes("${Jvm.current().javaHome}/include")

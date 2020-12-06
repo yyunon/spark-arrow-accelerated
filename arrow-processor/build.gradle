@@ -26,8 +26,8 @@ dependencies {
     } else {
         // The arrow gandiva library on central maven only includes the native libraries for MacOs
         // therefore on Linux the self-build version has to be used
-        def gandivaJarDir = System.getenv("GANDIVA_JAR_DIR") ?: { throw new Exception("The env variable GANDIVA_JAR_DIR is not set. Cannot find gandiva jar file ") }()
-        def gandivaJar = file("$gandivaJarDir/arrow-gandiva-${arrowVersion}.jar")
+        //def gandivaJarDir = System.getenv("GANDIVA_JAR_DIR") ?: { throw new Exception("The env variable GANDIVA_JAR_DIR is not set. Cannot find gandiva jar file ") }()
+        def gandivaJar = file("/home/yyonsel/bulk/gandiva-jar/arrow-gandiva-${arrowVersion}.jar")
 
         if (!gandivaJar.exists()) {
             throw new Exception("Cannot find gandiva jar at \$GANDIVA_JAR_DIR/arrow-gandiva-${arrowVersion}.jar")
