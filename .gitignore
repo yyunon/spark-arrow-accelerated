@@ -54,3 +54,6 @@ gradle-app.setting
 
 .DS_STORE
 */.DS_STORE/
+
+#vim
+.metals
