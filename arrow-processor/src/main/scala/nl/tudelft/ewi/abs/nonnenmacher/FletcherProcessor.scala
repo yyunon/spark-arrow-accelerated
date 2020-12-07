@@ -12,30 +12,41 @@ import org.apache.arrow.vector.{VectorSchemaRoot, VectorUnloader}
 
 import scala.collection.JavaConverters._
 
-class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoot, Long] {
+class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunction[VectorSchemaRoot, Long] {
 
   private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
 
   private var isClosed = false
   private val procId: Long = {
     NativeLibraryLoader.load()
-    val schemaAsBytes = ArrowTypeHelper.arrowSchemaToProtobuf(schema).toByteArray
-    initFletcherProcessor(schemaAsBytes)
+    val schemaAsBytes = Array(ArrowTypeHelper.arrowSchemaToProtobuf(schema_container(0)).toByteArray, 
+                              ArrowTypeHelper.arrowSchemaToProtobuf(schema_container(1)).toByteArray)
+  // TODO: Change this ASAP
+    initFletcherProcessor(schemaAsBytes(0), schemaAsBytes(1))
   }
 
-  def apply(rootIn: VectorSchemaRoot): Long = {
-    val buffersIn = BufferDescriptor(rootIn)
+  def apply(rootIn_1: VectorSchemaRoot,rootIn_2: VectorSchemaRoot ): Long = {
+    // TODO:
+    // Is there a more intelligent way to do all these? am I using these apis correctly haha?
+    // A way to automate multiple parquet files or not use multiple at all
+    val buffersIn_1 = BufferDescriptor(rootIn_1)
+    val buffersIn_2 = BufferDescriptor(rootIn_2)
 
-    buffersIn.assertAre64ByteAligned()
+    buffersIn_1.assertAre64ByteAligned()
+    buffersIn_2.assertAre64ByteAligned()
 
-    val r = reduce(procId, buffersIn.rowCount, buffersIn.addresses, buffersIn.sizes)
+    val r = join(procId, buffersIn_1.rowCount, buffersIn_1.addresses, buffersIn_1.sizes, buffersIn_2.rowCount, buffersIn_2.addresses, buffersIn_2.sizes)
     buffersIn.close()
     r
   }
 
-  @native private def initFletcherProcessor(schemaAsBytes: Array[Byte]): Long
 
-  @native private def reduce(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
+  // TODO: Change this ASAP
+  @native private def initFletcherProcessor(schemaAsBytes_1: Array[Byte], schemaAsBytes_2: Array[Byte]): Long
+
+  //@native private def reduce(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
+
+  @native private def join(procId: Long, rowNumbers_1: Int, inBufAddrs_1: Array[long], inBufSized_1: Array[Long], rowNumbers_2: Int, inBufAddrs_2: Array[long], inBufSized_2: Array[Long] ): Long;
 
   @native private def close(procId: Long): Unit;
 

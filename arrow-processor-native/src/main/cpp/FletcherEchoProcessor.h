@@ -16,7 +16,7 @@ class FletcherEchoProcessor : Processor {
     std::shared_ptr<arrow::RecordBatch> process(std::shared_ptr<arrow::RecordBatch> input) override;
 
 public:
-    explicit FletcherEchoProcessor(std::shared_ptr<arrow::Schema> schema_);
+    explicit FletcherEchoProcessor(std::initializer_list<std::shared_ptr<arrow::Schema> > schema_);
     ~FletcherEchoProcessor() override = default;
 };
 
