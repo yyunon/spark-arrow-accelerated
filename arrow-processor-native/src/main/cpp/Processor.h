@@ -11,11 +11,11 @@
 
 class Processor {
 public:
-    Processor(std::shared_ptr<arrow::Schema> schema_)
-    : schema(std::move(schema_)){};
+    Processor(std::initializer_list<std::shared_ptr<arrow::Schema> > schema_)
+    : schema(schema_){};
     virtual std::shared_ptr<arrow::RecordBatch> process(std::shared_ptr<arrow::RecordBatch> input) = 0;
     virtual ~Processor() = default;
-    std::shared_ptr<arrow::Schema> schema;
+    std::vector<std::shared_ptr<arrow::Schema> > schema;
 };
 
 #endif //SPARK_EXAMPLE_PROCESSOR_H

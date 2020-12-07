@@ -23,9 +23,9 @@ case class FletcherReductionExampleExec(out: Seq[Attribute], child: SparkPlan) e
 
     child.executeColumnar().mapPartitions { batches =>
 
-      val inputSchema = toNotNullableArrowSchema(child.schema, conf.sessionLocalTimeZone)
+      val inputSchemas = Array(toNotNullableArrowSchema(child.store_sales_schema, conf.sessionLocalTimeZone), toNotNullableArrowSchema(child.store_schema, conf.sessionLocalTimeZone))
 
-      val fletcherReductionProcessor = new FletcherProcessor(inputSchema)
+      val fletcherReductionProcessor = new FletcherProcessor(inputSchemas)
 
       TaskContext.get().addTaskCompletionListener[Unit] { _ =>
         fletcherReductionProcessor.close()
