@@ -25,12 +25,14 @@ dependencies {
     compile "org.apache.spark:spark-core_2.12:$sparkVersion"
 
     //USE JUnit 4 instead because scalatest is not compatible with jUni5
-    testCompile 'org.scalatest:scalatest_2.12:3.0.1'
+    testCompile 'org.scalatest:scalatest_2.13:3.0.8'
     testImplementation('junit:junit:4.13')
 }
 
 def libraryPaths = System.getenv("LD_LIBRARY_PATH")?.split(':')?.toList() ?: []
 libraryPaths.addAll([file("${project(':arrow-processor-native').buildDir}/lib/main/debug").absolutePath,
+                    "/home/yyonsel/bulk/project/local/lib64",
+                    "/home/yyonsel/bulk/project/local/lib",
                     "/usr/local/lib64",
                     "/usr/local/lib"])
 

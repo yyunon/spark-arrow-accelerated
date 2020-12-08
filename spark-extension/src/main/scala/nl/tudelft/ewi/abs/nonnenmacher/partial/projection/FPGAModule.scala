@@ -7,7 +7,7 @@ import org.apache.spark.sql.catalyst.expressions.Expression
 
 case class FPGAModule(val name: String, query: ExpressionMatcher, output: Field) {
 
-  val inputs: Map[String, Field] = {
+  val inputs: scala.collection.MapView[String, Field] = {
     val fields = query.flatMap {
       case In(field) => Seq(field)
       case _ => Seq()
