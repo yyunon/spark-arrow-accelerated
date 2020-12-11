@@ -16,7 +16,7 @@ class FletcherProcessorCpp {
     std::shared_ptr<fletcher::Platform> platform;
 public:
     std::vector<std::shared_ptr<arrow::Schema> > schema;
-    explicit FletcherProcessorCpp(std::initializer_list<std::shared_ptr<arrow::Schema> > input_schema): schema(input_schema)
+    explicit FletcherProcessorCpp(std::vector<std::shared_ptr<arrow::Schema> > input_schema): schema(input_schema)
     {
     // schema = std::move(input_schema);
 
