@@ -25,7 +25,7 @@ dependencies {
     compile "org.apache.spark:spark-core_2.12:$sparkVersion"
 
     //USE JUnit 4 instead because scalatest is not compatible with jUni5
-    testCompile 'org.scalatest:scalatest_2.13:3.0.8'
+    testCompile 'org.scalatest:scalatest_2.12:3.0.8'
     testImplementation('junit:junit:4.13')
 }
 
