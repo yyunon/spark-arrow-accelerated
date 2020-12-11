@@ -18,7 +18,7 @@ class CopyProcessor : Processor { ;
     std::shared_ptr<arrow::RecordBatch> process(std::shared_ptr<arrow::RecordBatch> input) override;
 
 public:
-    explicit CopyProcessor(std::shared_ptr<arrow::Schema> schema_)
+    explicit CopyProcessor(std::vector<std::shared_ptr<arrow::Schema> > schema_)
     : Processor(std::move(schema_)){}
     ~CopyProcessor() override = default;
 };

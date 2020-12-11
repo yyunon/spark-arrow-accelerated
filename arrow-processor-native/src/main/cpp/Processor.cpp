@@ -3,9 +3,6 @@
 //
 
 #include "Processor.h"
-#include "jni/Assertions.h"
-#include "jni/Converters.h"
-#include "nl_tudelft_ewi_abs_nonnenmacher_JNIProcessor.h"
 
 
 JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_JNIProcessor_process
@@ -21,7 +18,7 @@ JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_JNIProcessor_process
     jlong *in_sizes = env->GetLongArrayElements(in_buf_sizes, 0);
 
     std::shared_ptr<arrow::RecordBatch> in_batch;
-    ASSERT_OK(make_record_batch_with_buf_addrs(jni_processor->schema, num_rows, in_addrs, in_sizes, in_buf_len, &in_batch));
+    ASSERT_OK(make_record_batch_with_buf_addrs(jni_processor->schema[0], num_rows, in_addrs, in_sizes, in_buf_len, &in_batch));
 
     // Call processing step
     std::shared_ptr<arrow::RecordBatch> out_batch = jni_processor->process(in_batch);

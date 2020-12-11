@@ -8,6 +8,9 @@
 #include <arrow/api.h>
 #include <iostream>
 #include <utility>
+#include "jni/Assertions.h"
+#include "jni/Converters.h"
+#include "nl_tudelft_ewi_abs_nonnenmacher_JNIProcessor.h"
 
 class Processor {
 public:

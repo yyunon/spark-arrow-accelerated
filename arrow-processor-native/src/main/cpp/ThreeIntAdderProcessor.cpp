@@ -3,9 +3,6 @@
 //
 
 #include "ThreeIntAdderProcessor.h"
-#include "nl_tudelft_ewi_abs_nonnenmacher_JNIProcessorFactory_Initializer.h"
-#include "jni/Assertions.h"
-#include "jni/ProtobufSchemaDeserializer.h"
 
 using arrow::Int32Builder;
 
@@ -51,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_JNIProcessorFactory
 
     jsize schema_len = env->GetArrayLength(schema_arr);
     jbyte *schema_bytes = env->GetByteArrayElements(schema_arr, 0);
-    std::shared_ptr<arrow::Schema> schema = ReadSchemaFromProtobufBytes(schema_bytes, schema_len);
+    std::vector<std::shared_ptr<arrow::Schema> > schema = {ReadSchemaFromProtobufBytes(schema_bytes, schema_len)};
 
     return (jlong) new ThreeIntAdderProcessor(schema);
 }

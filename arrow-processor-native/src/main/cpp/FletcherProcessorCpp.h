@@ -5,6 +5,12 @@
 #ifndef SPARK_EXAMPLE_FLETCHERPROCESSORCPP_H
 #define SPARK_EXAMPLE_FLETCHERPROCESSORCPP_H
 
+#include "jni/Assertions.h"
+#include "jni/Converters.h"
+#include "jni/ProtobufSchemaDeserializer.h"
+
+#include <utility>
+#include <unistd.h>
 #include <arrow/api.h>
 #include <iostream>
 #include <utility>
@@ -34,7 +40,7 @@ public:
 
     };
     ~FletcherProcessorCpp() = default;
-    long reduce(const std::shared_ptr<arrow::RecordBatch> &input);
+    long join(std::vector<std::shared_ptr<arrow::RecordBatch> > input);
 };
 
 
