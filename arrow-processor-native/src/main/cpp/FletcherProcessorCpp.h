@@ -24,14 +24,12 @@ public:
     std::vector<std::shared_ptr<arrow::Schema> > schema;
     explicit FletcherProcessorCpp(std::vector<std::shared_ptr<arrow::Schema> > input_schema): schema(input_schema)
     {
-    // schema = std::move(input_schema);
-
     // Create a Fletcher platform object, attempting to autodetect the platform.
     ASSERT_FLETCHER_OK(fletcher::Platform::Make(&platform, false));
-
     // Initialize the platform.
     ASSERT_FLETCHER_OK(platform->Init());
-
+    // Create the context at init this time
+   ASSERT_FLETCHER_OK(fletcher::Context::Make(&context, platform));
 
     //assert Schema is OK
     //TODO: 1 column string, the other long, both not null
@@ -40,7 +38,11 @@ public:
 
     };
     ~FletcherProcessorCpp() = default;
+    long reduce(std::shared_ptr<arrow::RecordBatch> input);
+    long broadcast(std::vector<std::shared_ptr<arrow::RecordBatch> > input);
     long join(std::vector<std::shared_ptr<arrow::RecordBatch> > input);
+private:
+    std::shared_ptr<fletcher::Context> context;
 };
 
 

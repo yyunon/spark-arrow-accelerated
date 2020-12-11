@@ -21,52 +21,52 @@ long trivialCpuVersion(const std::shared_ptr<arrow::RecordBatch> &record_batch) 
     }
     return sum;
 }
-//long FletcherProcessorCpp::reduce(std::shared_ptr<arrow::RecordBatch> record_batch ) {
-//
-//    // Create a context for our application on the platform.
-//   std::shared_ptr<fletcher::Context> context;
-//   ASSERT_FLETCHER_OK(fletcher::Context::Make(&context, platform));
-//
-//   // Queue the recordbatch to our context.
-//   ASSERT_FLETCHER_OK(context->QueueRecordBatch(record_batch));
-//
-//   // "Enable" the context, potentially copying the recordbatch to the device. This depends on your platform.
-//   // AWS EC2 F1 requires a copy, but OpenPOWER SNAP doesn't.
-//   ASSERT_FLETCHER_OK(context->Enable());
-//
-//   // Create a kernel based on the context.
-//   fletcher::Kernel kernel(context);
-//
-//   // Reset the kernel.
-//   ASSERT_FLETCHER_OK(kernel.Reset());
-//
-//   // Start the kernel.
-//   ASSERT_FLETCHER_OK(kernel.Start());
-//
-//   // Wait for the kernel to finish.
-//   ASSERT_FLETCHER_OK(kernel.PollUntilDone());
-//
-//   uint32_t return_value_0;
-//   uint32_t return_value_1;
-//
-//   // Obtain the return value.
-//   ASSERT_FLETCHER_OK(kernel.GetReturn(&return_value_0, &return_value_1));
-//
-//   long result = *reinterpret_cast<int64_t *>(&return_value_0);
-//
-//   std::cout << "RESULT returned from Fletcher: " << *reinterpret_cast<int64_t *>(&return_value_0) << std::endl;
-//
-//    //The echo platform does not return a proper value -> fallback to cpu impl
-//    if (platform->name() == "echo") {
-//        return trivialCpuVersion(record_batch);
-//    }
-//    return result;
-//}
-//
-long FletcherProcessorCpp::join(std::vector<std::shared_ptr<arrow::RecordBatch> > record_batch ) {
+long FletcherProcessorCpp::reduce(std::shared_ptr<arrow::RecordBatch> record_batch ) {
 
-    // Create a context for our application on the platform.
-   std::shared_ptr<fletcher::Context> context;
+   // Queue the recordbatch to our context.
+   ASSERT_FLETCHER_OK(context->QueueRecordBatch(record_batch));
+
+   // "Enable" the context, potentially copying the recordbatch to the device. This depends on your platform.
+   // AWS EC2 F1 requires a copy, but OpenPOWER SNAP doesn't.
+   ASSERT_FLETCHER_OK(context->Enable());
+
+   // Create a kernel based on the context.
+   fletcher::Kernel kernel(context);
+
+   // Reset the kernel.
+   ASSERT_FLETCHER_OK(kernel.Reset());
+
+   // Start the kernel.
+   ASSERT_FLETCHER_OK(kernel.Start());
+
+   // Wait for the kernel to finish.
+   ASSERT_FLETCHER_OK(kernel.PollUntilDone());
+
+   uint32_t return_value_0;
+   uint32_t return_value_1;
+
+   // Obtain the return value.
+   ASSERT_FLETCHER_OK(kernel.GetReturn(&return_value_0, &return_value_1));
+
+   long result = *reinterpret_cast<int64_t *>(&return_value_0);
+
+   std::cout << "RESULT returned from Fletcher: " << *reinterpret_cast<int64_t *>(&return_value_0) << std::endl;
+
+    //The echo platform does not return a proper value -> fallback to cpu impl
+    if (platform->name() == "echo") {
+        return trivialCpuVersion(record_batch);
+    }
+    return result;
+}
+
+//In this method,, try to emulate Broadcast op. Do not enable the context, the bug for my hw.
+long FletcherProcessorCpp::broadcast(std::vector<std::shared_ptr<arrow::RecordBatch> > record_batch ) {
+   // Queue the recordbatch to our context.
+   for(auto batches : record_batch)
+     ASSERT_FLETCHER_OK(context->QueueRecordBatch(batches));
+   return 0;
+}
+long FletcherProcessorCpp::join(std::vector<std::shared_ptr<arrow::RecordBatch> > record_batch ) {
 
    // Queue the recordbatch to our context.
    for(auto batches : record_batch)
@@ -148,6 +148,19 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_j
     ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[1], num_rows_2, in_addrs_2, in_sizes_2, in_buf_len_2, &in_batch[1]));
 
     return (jlong) processor->join(in_batch);
+}
+
+JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_broadcast
+        (JNIEnv *env, jobject, jlong process_ptr, jint num_rows, jlongArray in_buf_addrs, jlongArray in_buf_sizes) {
+    FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
+    // Extract input RecordBatch
+    // For now only broadcast 1 batch
+    int in_buf_len = env->GetArrayLength(in_buf_addrs);
+    ASSERT(in_buf_len == env->GetArrayLength(in_buf_sizes), "mismatch in arraylen of buf_addrs and buf_sizes");
+    jlong *in_addrs = env->GetLongArrayElements(in_buf_addrs, 0);
+    std::vector<std::shared_ptr<arrow::RecordBatch> > in_batch;
+    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[0], num_rows, in_addrs, in_sizes, in_buf_len, &in_batch[0]));
+    return (jlong) processor->broadcast(in_batch);
 }
 
 JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_close
