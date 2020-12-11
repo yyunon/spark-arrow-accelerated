@@ -12,7 +12,7 @@ import org.apache.arrow.vector.{VectorSchemaRoot, VectorUnloader}
 
 import scala.collection.JavaConverters._
 
-class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunction[VectorSchemaRoot, Long] {
+class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunction[Array[VectorSchemaRoot], Long] {
 
   private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
 
@@ -25,12 +25,12 @@ class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunctio
     initFletcherProcessor(schemaAsBytes(0), schemaAsBytes(1))
   }
 
-  def apply(rootIn_1: VectorSchemaRoot,rootIn_2: VectorSchemaRoot ): Long = {
+  def apply(rootIn: Array[VectorSchemaRoot]): Long = {
     // TODO:
     // Is there a more intelligent way to do all these? am I using these apis correctly haha?
     // A way to automate multiple parquet files or not use multiple at all
-    val buffersIn_1 = BufferDescriptor(rootIn_1)
-    val buffersIn_2 = BufferDescriptor(rootIn_2)
+    val buffersIn_1 = BufferDescriptor(rootIn(0))
+    val buffersIn_2 = BufferDescriptor(rootIn(1))
 
     buffersIn_1.assertAre64ByteAligned()
     buffersIn_2.assertAre64ByteAligned()
