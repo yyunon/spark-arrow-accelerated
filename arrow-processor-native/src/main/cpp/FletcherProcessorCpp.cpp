@@ -121,36 +121,35 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_i
 
 
 
+//JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_join
+//        (JNIEnv *env, jobject, jlong process_ptr, jint num_rows_1, jlongArray in_buf_addrs_1, jlongArray in_buf_sizes_1, jint num_rows_2, jlongArray in_buf_addrs_2, jlongArray in_buf_sizes_2) {
+//
+//    FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
+//
+//    // Extract input RecordBatch
+//    int in_buf_len_1 = env->GetArrayLength(in_buf_addrs_1);
+//    ASSERT(in_buf_len_1 == env->GetArrayLength(in_buf_sizes_1), "mismatch in arraylen of buf_addrs and buf_sizes");
+//    int in_buf_len_2 = env->GetArrayLength(in_buf_addrs_2);
+//    ASSERT(in_buf_len_2 == env->GetArrayLength(in_buf_sizes_2), "mismatch in arraylen of buf_addrs and buf_sizes");
+//
+//    jlong *in_addrs_1 = env->GetLongArrayElements(in_buf_addrs_1, 0);
+//    jlong *in_sizes_1 = env->GetLongArrayElements(in_buf_sizes_1, 0);
+//
+//    jlong *in_addrs_2 = env->GetLongArrayElements(in_buf_addrs_2, 0);
+//    jlong *in_sizes_2 = env->GetLongArrayElements(in_buf_sizes_2, 0);
+//
+//    std::vector<std::shared_ptr<arrow::RecordBatch> > in_batch;
+//    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[0], num_rows_1, in_addrs_1, in_sizes_1, in_buf_len_1, &in_batch[0]));
+//    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[1], num_rows_2, in_addrs_2, in_sizes_2, in_buf_len_2, &in_batch[1]));
+//
+//    return (jlong) processor->join(in_batch);
+//}
 /*
  * Class:     nl_tudelft_ewi_abs_nonnenmacher_FletcherReductionProcessor
- * Method:    reduce
+ * Method:    join
  * Signature: (JI[J[J)J
  */
 JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_join
-        (JNIEnv *env, jobject, jlong process_ptr, jint num_rows_1, jlongArray in_buf_addrs_1, jlongArray in_buf_sizes_1, jint num_rows_2, jlongArray in_buf_addrs_2, jlongArray in_buf_sizes_2) {
-
-    FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
-
-    // Extract input RecordBatch
-    int in_buf_len_1 = env->GetArrayLength(in_buf_addrs_1);
-    ASSERT(in_buf_len_1 == env->GetArrayLength(in_buf_sizes_1), "mismatch in arraylen of buf_addrs and buf_sizes");
-    int in_buf_len_2 = env->GetArrayLength(in_buf_addrs_2);
-    ASSERT(in_buf_len_2 == env->GetArrayLength(in_buf_sizes_2), "mismatch in arraylen of buf_addrs and buf_sizes");
-
-    jlong *in_addrs_1 = env->GetLongArrayElements(in_buf_addrs_1, 0);
-    jlong *in_sizes_1 = env->GetLongArrayElements(in_buf_sizes_1, 0);
-
-    jlong *in_addrs_2 = env->GetLongArrayElements(in_buf_addrs_2, 0);
-    jlong *in_sizes_2 = env->GetLongArrayElements(in_buf_sizes_2, 0);
-
-    std::vector<std::shared_ptr<arrow::RecordBatch> > in_batch;
-    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[0], num_rows_1, in_addrs_1, in_sizes_1, in_buf_len_1, &in_batch[0]));
-    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[1], num_rows_2, in_addrs_2, in_sizes_2, in_buf_len_2, &in_batch[1]));
-
-    return (jlong) processor->join(in_batch);
-}
-
-JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_broadcast
         (JNIEnv *env, jobject, jlong process_ptr, jint num_rows, jlongArray in_buf_addrs, jlongArray in_buf_sizes) {
     FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
     // Extract input RecordBatch
@@ -158,8 +157,27 @@ JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_br
     int in_buf_len = env->GetArrayLength(in_buf_addrs);
     ASSERT(in_buf_len == env->GetArrayLength(in_buf_sizes), "mismatch in arraylen of buf_addrs and buf_sizes");
     jlong *in_addrs = env->GetLongArrayElements(in_buf_addrs, 0);
+    jlong *in_sizes = env->GetLongArrayElements(in_buf_sizes, 0);
     std::vector<std::shared_ptr<arrow::RecordBatch> > in_batch;
-    ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema[0], num_rows, in_addrs, in_sizes, in_buf_len, &in_batch[0]));
+    ASSERT_OK(make_record_batch_with_buf_addrs((processor->schema)[0], num_rows, in_addrs, in_sizes, in_buf_len, &in_batch[0]));
+    return (jlong) processor->join(in_batch);
+}
+/*
+ * Class:     nl_tudelft_ewi_abs_nonnenmacher_FletcherReductionProcessor
+ * Method:    broadcast
+ * Signature: (JI[J[J)J
+ */
+JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_broadcast
+        (JNIEnv *env, jobject, jlong process_ptr, jint num_rows, jlongArray in_buf_addrs, jlongArray in_buf_sizes) {
+    FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
+    // Extract input RecordBatch
+    // For now only broadcast 1 batch
+    int in_buf_len = env->GetArrayLength(in_buf_addrs);
+    ASSERT(in_buf_len == env->GetArrayLength(in_buf_sizes), "mismatch in arraylen of buf_addrs and buf_sizes");
+    jlong *in_addrs = env->GetLongArrayElements(in_buf_addrs, 0);
+    jlong *in_sizes = env->GetLongArrayElements(in_buf_sizes, 0);
+    std::vector<std::shared_ptr<arrow::RecordBatch> > in_batch;
+    ASSERT_OK(make_record_batch_with_buf_addrs((processor->schema)[0], num_rows, in_addrs, in_sizes, in_buf_len, &in_batch[0]));
     return (jlong) processor->broadcast(in_batch);
 }
 

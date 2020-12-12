@@ -35,19 +35,21 @@ class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunctio
     buffersIn_1.assertAre64ByteAligned()
     buffersIn_2.assertAre64ByteAligned()
 
-    val r = join(procId, buffersIn_1.rowCount, buffersIn_1.addresses, buffersIn_1.sizes, buffersIn_2.rowCount, buffersIn_2.addresses, buffersIn_2.sizes)
+    // TODO:
+    // Seperate these later
+    val b = broadcast(procId, buffersIn_1.rowCount, buffersIn_1.addresses, buffersIn_1.sizes)
+    val r = join(procId, buffersIn_2.rowCount, buffersIn_2.addresses, buffersIn_2.sizes)
     buffersIn_1.close()
     buffersIn_2.close()
     r
   }
 
-
-  // TODO: Change this ASAP
   @native private def initFletcherProcessor(schemaAsBytes_1: Array[Byte], schemaAsBytes_2: Array[Byte]): Long
 
-  //@native private def reduce(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
+  @native private def broadcast(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
 
-  @native private def join(procId: Long, rowNumbers_1: Int, inBufAddrs_1: Array[Long], inBufSized_1: Array[Long], rowNumbers_2: Int, inBufAddrs_2: Array[Long], inBufSized_2: Array[Long] ): Long;
+  @native private def join(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
+  //@native private def join(procId: Long, rowNumbers_1: Int, inBufAddrs_1: Array[Long], inBufSized_1: Array[Long], rowNumbers_2: Int, inBufAddrs_2: Array[Long], inBufSized_2: Array[Long] ): Long;
 
   @native private def close(procId: Long): Unit;
 

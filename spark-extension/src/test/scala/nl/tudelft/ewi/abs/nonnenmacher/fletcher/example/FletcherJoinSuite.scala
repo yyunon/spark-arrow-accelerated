@@ -1,5 +1,6 @@
 package nl.tudelft.ewi.abs.nonnenmacher.fletcher.example
 
+import org.apache.spark.sql.types._
 import nl.tudelft.ewi.abs.nonnenmacher.SparkSessionGenerator
 import nl.tudelft.ewi.abs.nonnenmacher.parquet.{ArrowParquetReaderExtension, ArrowParquetSourceScanExec}
 import org.apache.spark.sql.types._
@@ -78,8 +79,8 @@ class FletcherJoinSuite extends FunSuite with SparkSessionGenerator {
 
     val query =
       """ SELECT SUM(`ss_quantity`)
-        | FROM parquet.`/home/yyonsel/bulk/parquet_files/store_sales.parquet`, parquet.`/home/yyonsel/bulk/parquet_files/store.parquet`
-        | WHERE `ss_store_sk` = `s_store_sk`' """.stripMargin
+        | FROM parquet.`/home/yyonsel/bulk/parquet_files/store.parquet`,parquet.`/home/yyonsel/bulk/parquet_files/store_sales.parquet`
+        | WHERE `s_store_sk` = `ss_store_sk`' """.stripMargin
 
     val sqlDF = spark.sql(query)
 
@@ -95,9 +96,10 @@ class FletcherJoinSuite extends FunSuite with SparkSessionGenerator {
   }
 
   test("execution"){
-    val res = spark.sql(s""" SELECT SUM(`number`) as `number`
-                                   | FROM parquet.`../data/taxi-uncompressed.parquet`
-                                   | WHERE `string` rlike 'Blue Ribbon Taxi Association Inc.' """.stripMargin)
+    val query =
+      """ SELECT SUM(`ss_quantity`)
+        | FROM parquet.`/home/yyonsel/bulk/parquet_files/store_sales.parquet`, parquet.`/home/yyonsel/bulk/parquet_files/store.parquet`
+        | WHERE `ss_store_sk` = `s_store_sk`' """.stripMargin
     println(res.collect())
   }
 }

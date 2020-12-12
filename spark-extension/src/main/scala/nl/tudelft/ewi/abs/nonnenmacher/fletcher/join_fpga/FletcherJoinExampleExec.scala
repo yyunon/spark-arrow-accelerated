@@ -10,21 +10,21 @@ import org.apache.spark.sql.SparkArrowUtils
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.catalyst.expressions.{Attribute, GenericInternalRow}
 import org.apache.spark.sql.execution.metric.{SQLMetric, SQLMetrics}
-import org.apache.spark.sql.execution.{SparkPlan, UnaryExecNode}
+import org.apache.spark.sql.execution.{SparkPlan, BinaryExecNode}
 import org.apache.spark.sql.types.StructType
 
 import scala.collection.JavaConverters._
 
-case class FletcherReductionExampleExec(out: Seq[Attribute], child: SparkPlan) extends UnaryExecNode {
+case class FletcherJoinExampleExec(out: Seq[Attribute], left: SparkPlan, right: SparkPlan) extends BinaryExecNode {
 
   override def doExecute(): RDD[InternalRow] = {
     val aggregationTime = longMetric("aggregationTime")
     //    val processing = longMetric("processing")
 
-    child.executeColumnar().mapPartitions { batches =>
+    streamedPlan.executeColumnar().mapPartitions { batches =>
 
-      val inputSchema = toNotNullableArrowSchema(child.schema, conf.sessionLocalTimeZone)
-
+      val inputSchema = Array(toNotNullableArrowSchema(left.schema, conf.sessionLocalTimeZone),
+                              toNotNullableArrowSchema(right.schema, conf.sessionLocalTimeZone))
       val fletcherReductionProcessor = new FletcherProcessor(inputSchema)
 
       TaskContext.get().addTaskCompletionListener[Unit] { _ =>
