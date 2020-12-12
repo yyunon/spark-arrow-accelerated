@@ -20,8 +20,11 @@ case class FletcherJoinExampleExec(out: Seq[Attribute], left: SparkPlan, right: 
   override def doExecute(): RDD[InternalRow] = {
     val aggregationTime = longMetric("aggregationTime")
     //    val processing = longMetric("processing")
-
-    streamedPlan.executeColumnar().mapPartitions { batches =>
+  
+    // Hardcode Build side to left
+    // buildPlan : left
+    // streamedPlan : right
+    right.executeColumnar().mapPartitions { batches =>
 
       val inputSchema = Array(toNotNullableArrowSchema(left.schema, conf.sessionLocalTimeZone),
                               toNotNullableArrowSchema(right.schema, conf.sessionLocalTimeZone))
