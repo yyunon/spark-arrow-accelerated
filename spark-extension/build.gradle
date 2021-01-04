@@ -39,7 +39,7 @@ libraryPaths.addAll([file("${project(':arrow-processor-native').buildDir}/lib/ma
 test {
     systemProperty "java.library.path", libraryPaths.join(':')
     systemProperty "io.netty.allocator.directMemoryCacheAlignment", "64"
-    maxHeapSize = "6G"
+    maxHeapSize = "12G"
 }
 
 def metricsFile = "${project.buildDir}/reports/jmh/metrics.csv"
@@ -53,7 +53,7 @@ jmh {
                "-Dproject.root=${project.rootDir}".toString(),
                "-Doutput.metrics=$metricsFile".toString(),
                "-Doutput.metrics.raw=$metricsRawFile".toString(),
-               '-Xms6G', '-Xmx6G',
+               '-Xms12G', '-Xmx12G',
                 "-Dio.netty.allocator.directMemoryCacheAlignment=64"]
     humanOutputFile = project.file("${project.buildDir}/reports/jmh/details.txt")
     failOnError = true

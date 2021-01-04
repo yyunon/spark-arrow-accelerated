@@ -24,14 +24,14 @@ case class FletcherJoinExampleExec(out: Seq[Attribute], left: SparkPlan, right: 
     // Hardcode Build side to left
     // buildPlan : left
     // streamedPlan : right
+    val inputSchema = Array(toNotNullableArrowSchema(left.schema, conf.sessionLocalTimeZone),
+                            toNotNullableArrowSchema(right.schema, conf.sessionLocalTimeZone))
+    val hashes = left.executeColumnar().mapPartitions{ batches => batches.map(_.toArrow)}
+    val fletcherProcessor = new FletcherProcessor(inputSchema, hashes.collect())
+
     right.executeColumnar().mapPartitions { batches =>
-
-      val inputSchema = Array(toNotNullableArrowSchema(left.schema, conf.sessionLocalTimeZone),
-                              toNotNullableArrowSchema(right.schema, conf.sessionLocalTimeZone))
-      val fletcherReductionProcessor = new FletcherProcessor(inputSchema)
-
       TaskContext.get().addTaskCompletionListener[Unit] { _ =>
-        fletcherReductionProcessor.close()
+        fletcherProcessor.close()
       }
 
       var start: Long = 0
@@ -39,7 +39,7 @@ case class FletcherJoinExampleExec(out: Seq[Attribute], left: SparkPlan, right: 
       batches
         .map { x => start = System.nanoTime(); x }
         .map(_.toArrow)
-        .mapAndAutoClose(fletcherReductionProcessor)
+        .mapAndAutoClose(fletcherProcessor)
         .map(toRow)
         .map { x => aggregationTime += System.nanoTime() - start; x }
     }

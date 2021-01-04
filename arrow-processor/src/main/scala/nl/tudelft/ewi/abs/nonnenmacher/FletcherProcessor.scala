@@ -12,38 +12,7 @@ import org.apache.arrow.vector.{VectorSchemaRoot, VectorUnloader}
 
 import scala.collection.JavaConverters._
 
-//class FletcherProcessor(schema_container: Array[Schema]) extends ClosableFunction[Array[VectorSchemaRoot], Long] {
-//
-//  private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
-//
-//  private var isClosed = false
-//  private val procId: Long = {
-//    NativeLibraryLoader.load()
-//    val schemaAsBytes = Array(ArrowTypeHelper.arrowSchemaToProtobuf(schema_container(0)).toByteArray, 
-//                              ArrowTypeHelper.arrowSchemaToProtobuf(schema_container(1)).toByteArray)
-//  // TODO: Change this ASAP
-//    initFletcherProcessor(schemaAsBytes(0), schemaAsBytes(1))
-//  }
-//
-//  def apply(rootIn: Array[VectorSchemaRoot]): Long = {
-//    // TODO:
-//    // Is there a more intelligent way to do all these? am I using these apis correctly haha?
-//    // A way to automate multiple parquet files or not use multiple at all
-//    val buffersIn_1 = BufferDescriptor(rootIn(0))
-//    val buffersIn_2 = BufferDescriptor(rootIn(1))
-//
-//    buffersIn_1.assertAre64ByteAligned()
-//    buffersIn_2.assertAre64ByteAligned()
-//
-//    // TODO:
-//    // Seperate these later
-//    val b = broadcast(procId, buffersIn_1.rowCount, buffersIn_1.addresses, buffersIn_1.sizes)
-//    val r = join(procId, buffersIn_2.rowCount, buffersIn_2.addresses, buffersIn_2.sizes)
-//    buffersIn_1.close()
-//    buffersIn_2.close()
-//    r
-//  }
-class FletcherProcessor(schema: Array[Schema]){
+class FletcherProcessor(schema: Array[Schema], hash: Array[VectorSchemaRoot]) extends ClosableFunction[VectorSchemaRoot, Long] {
 
   private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
 
@@ -52,57 +21,31 @@ class FletcherProcessor(schema: Array[Schema]){
     NativeLibraryLoader.load()
     val schemaAsBytes = Array(ArrowTypeHelper.arrowSchemaToProtobuf(schema(0)).toByteArray, 
                               ArrowTypeHelper.arrowSchemaToProtobuf(schema(1)).toByteArray)
-  // TODO: Change this later
+    // TODO: Change this later
     initFletcherProcessor(schemaAsBytes(0), schemaAsBytes(1))
   }
 
   def apply(rootIn: VectorSchemaRoot): Long = {
-    procId
-  }
-class FletcherProcessorBroadcast(schema: Schema) extends ClosableFunction[VectorSchemaRoot, Long] with FletcherProcessor{
 
-  private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
-
-  private var isClosed = false
-  }
-
-  def apply(rootIn: VectorSchemaRoot): Long = {
     val buffersIn = BufferDescriptor(rootIn)
+    val hashedKeys = BufferDescriptor(hash(0)) // Hash will be less than 500! Be careful later on!
 
     buffersIn.assertAre64ByteAligned()
+    hashedKeys.assertAre64ByteAligned()
 
-    val r = broadcast(procId, buffersIn.rowCount, buffersIn.addresses, buffersIn.sizes)
-    buffersIn.close()
-    r
-  }
-}
-class FletcherProcessorJoin(schema: Schema) extends ClosableFunction[VectorSchemaRoot, Long] with FletcherProcessor {
-
-  private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
-
-  private var isClosed = false
-  //private val procId: Long = {
-  //  NativeLibraryLoader.load()
-  //  val schemaAsBytes = ArrowTypeHelper.arrowSchemaToProtobuf(schema).toByteArray
-  //  initFletcherProcessor(schemaAsBytes)
-  //}
-
-  def apply(rootIn: VectorSchemaRoot): Long = {
-    val buffersIn = BufferDescriptor(rootIn)
-
-    buffersIn.assertAre64ByteAligned()
-
+    // TODO:
+    // Seperate these later
+    val b = broadcast(procId, hashedKeys.rowCount, hashedKeys.addresses, hashedKeys.sizes)
     val r = join(procId, buffersIn.rowCount, buffersIn.addresses, buffersIn.sizes)
     buffersIn.close()
+    hashedKeys.close()
     r
   }
-}
   @native private def initFletcherProcessor(schemaAsBytes_1: Array[Byte], schemaAsBytes_2: Array[Byte]): Long
 
   @native private def broadcast(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
 
   @native private def join(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
-  //@native private def join(procId: Long, rowNumbers_1: Int, inBufAddrs_1: Array[Long], inBufSized_1: Array[Long], rowNumbers_2: Int, inBufAddrs_2: Array[Long], inBufSized_2: Array[Long] ): Long;
 
   @native private def close(procId: Long): Unit;
 
@@ -143,3 +86,4 @@ class FletcherProcessorJoin(schema: Schema) extends ClosableFunction[VectorSchem
     }
   }
 }
+
