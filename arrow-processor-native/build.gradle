@@ -14,6 +14,8 @@ class LibFinder {
 
     def libPaths = {
         def paths = (System.getenv("LD_LIBRARY_PATH")?.split(':')?.toList() ?: [])
+        paths.add ( "/home/yyonsel/bulk/project/local/lib" )
+        paths.add ( "/home/yyonsel/bulk/project/local/lib64" )
         paths.add ( "/usr/local/lib" )
         paths.add ( "/usr/local/lib64" )
         paths
@@ -91,6 +93,7 @@ library {
         linkTask.get().lib(findLib("protobuf"))
         linkTask.get().lib(findLib("arrow_dataset"))
         linkTask.get().lib(findLib("arrow"))
+        linkTask.get().lib(findLib("fletcher_snap"))
         linkTask.get().lib(findLib("fletcher"))
         linkTask.get().lib(findLib("parquet"))
     }

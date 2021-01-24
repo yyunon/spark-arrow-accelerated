@@ -27,6 +27,7 @@ DataSetParquetReader::DataSetParquetReader(const std::shared_ptr<arrow::MemoryPo
 
     // TODO: Support list of files
     const std::string &uri = "file://" +file_name;
+    std::cout << "Reading file...." << uri <<"\n";
     std::shared_ptr<arrow::fs::FileSystem> filesystem = arrow::fs::FileSystemFromUri(uri).ValueOrDie();
     arrow::dataset::FileSource source(file_name, filesystem);
 
@@ -70,12 +71,14 @@ DataSetParquetReader::DataSetParquetReader(const std::shared_ptr<arrow::MemoryPo
 
 std::shared_ptr<arrow::RecordBatch> DataSetParquetReader::ReadNext() {
 
+    std::cout << "INSIDE READNEXT BATCH\n";
     batch = recordBatchIter->Next().ValueOrDie();
 
     if (batch != recordBatchEnd) {
         return batch;
     }
 
+    std::cout << "INSIDE SCAN TASK \n";
     const std::shared_ptr<ScanTask> &nextScanTask = scan_task_it->Next().ValueOrDie();
     if (nextScanTask == scanTaskEnd) {
         return recordBatchEnd;
@@ -126,6 +129,7 @@ JNIEXPORT jboolean JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_NativeParquetRea
     jlong vector_lengths[num_fields];
     jlong vector_null_counts[num_fields];
 
+    std::cout << "The number of fields..." <<num_fields << "\n";
     for (int i = 0; i < num_fields; i++) {
         const std::shared_ptr<arrow::Field> &field = schema->field(i);
         const std::shared_ptr<arrow::Array> &column = out_batch->column(i);
