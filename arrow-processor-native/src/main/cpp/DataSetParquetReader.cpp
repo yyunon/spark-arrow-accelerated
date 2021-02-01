@@ -121,7 +121,7 @@ JNIEXPORT jboolean JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_NativeParquetRea
     // Read buffers, field vector length & nullcount from RecordBatch
     const std::shared_ptr<arrow::Schema> &schema = out_batch->schema();
     auto num_fields = schema->num_fields();
-
+    //std::cout << schema.ToString(true) << "\n";
     jlong buffer_addresses[num_fields * 3];
     jlong vector_lengths[num_fields];
     jlong vector_null_counts[num_fields];

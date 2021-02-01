@@ -12,7 +12,7 @@ import org.apache.arrow.vector.{VectorSchemaRoot, VectorUnloader}
 
 import scala.collection.JavaConverters._
 
-class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoot, Long] {
+class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoot, Double] {
 
   private val log = Logger.getLogger(classOf[FletcherProcessor].getName)
 
@@ -23,7 +23,7 @@ class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoo
     initFletcherProcessor(schemaAsBytes)
   }
 
-  def apply(rootIn: VectorSchemaRoot): Long = {
+  def apply(rootIn: VectorSchemaRoot): Double = {
     val buffersIn = BufferDescriptor(rootIn)
 
     buffersIn.assertAre64ByteAligned()
@@ -35,7 +35,7 @@ class FletcherProcessor(schema: Schema) extends ClosableFunction[VectorSchemaRoo
 
   @native private def initFletcherProcessor(schemaAsBytes: Array[Byte]): Long
 
-  @native private def reduce(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Long;
+  @native private def reduce(procId: Long, rowNumbers: Int, inBufAddrs: Array[Long], inBufSized: Array[Long]): Double;
 
   @native private def close(procId: Long): Unit;
 

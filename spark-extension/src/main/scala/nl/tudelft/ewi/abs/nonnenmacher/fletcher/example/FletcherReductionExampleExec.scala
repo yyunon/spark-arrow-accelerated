@@ -42,7 +42,7 @@ case class FletcherReductionExampleExec(out: Seq[Attribute], child: SparkPlan) e
     }
   }
 
-  private def toRow(res: Long): InternalRow = {
+  private def toRow(res: Double): InternalRow = {
     val arr: Array[Any] = Array(res)
     new GenericInternalRow(arr)
   }
@@ -52,6 +52,11 @@ case class FletcherReductionExampleExec(out: Seq[Attribute], child: SparkPlan) e
   def toNotNullableArrowSchema(schema: StructType, timeZoneId: String): Schema = {
     new Schema(schema.map { field =>
       SparkArrowUtils.toArrowField(field.name, field.dataType, nullable = false, timeZoneId)
+    }.asJava)
+  }
+  def toNullableArrowSchema(schema: StructType, timeZoneId: String): Schema = {
+    new Schema(schema.map { field =>
+      SparkArrowUtils.toArrowField(field.name, field.dataType, nullable = true, timeZoneId)
     }.asJava)
   }
 

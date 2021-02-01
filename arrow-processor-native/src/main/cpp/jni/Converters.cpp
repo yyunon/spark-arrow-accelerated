@@ -1,4 +1,5 @@
 #include "Converters.h"
+#include "../utils.h"
 #include <iostream>
 #include <arrow/api.h>
 #include "JavaResizableBuffer.h"
@@ -100,6 +101,12 @@ Status make_record_batch_with_buf_addrs(std::shared_ptr<arrow::Schema> schema, i
             // add offsets buffer for variable-len fields.
             jlong offsets_addr = in_buf_addrs[buf_idx++];
             jlong offsets_size = in_buf_sizes[sz_idx++];
+            // Revert this for later
+            //std::cout << offsets_addr << "," << offsets_size;
+            //if(field->type()->id() == arrow::Type::type::DOUBLE)
+            //  for(int i =0 ; i < offsets_size ; ++i)
+            //    std::cout << *reinterpret_cast<double *>(buffer_t[i]) << ",";
+            //std::cout << "\n";
             auto offsets = std::shared_ptr<arrow::Buffer>(
                     new arrow::Buffer(reinterpret_cast<uint8_t *>(offsets_addr), offsets_size));
             buffers.push_back(offsets);
@@ -111,6 +118,8 @@ Status make_record_batch_with_buf_addrs(std::shared_ptr<arrow::Schema> schema, i
         } else {
             array_data = arrow::ArrayData::Make(field->type(), num_rows, std::move(buffers), 0);
         }
+
+          
 
         columns.push_back(array_data);
     }

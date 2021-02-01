@@ -3,10 +3,13 @@ package nl.tudelft.ewi.abs.nonnenmacher.fletcher.example
 import nl.tudelft.ewi.abs.nonnenmacher.SparkSessionGenerator
 import nl.tudelft.ewi.abs.nonnenmacher.parquet.{ArrowParquetReaderExtension, ArrowParquetSourceScanExec}
 import org.apache.spark.sql.types._
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{SparkSession, SparkSessionExtensions}
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
+import scala.reflect.io.Directory
+import java.io.File
 
 case class Employee(name: String, age: Long)
 
@@ -15,100 +18,118 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
 
   override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(ArrowParquetReaderExtension, FletcherReductionExampleExtension)
 
-  ignore("convert taxi csv files to parquet file") {
-
-    val codec = "uncompressed"
-
+  ignore("Parquet file") {
     val spark = SparkSession
       .builder()
-      .appName(this.styleName)
+      .appName("Parquet builder")
       .config("spark.master", "local")
       .getOrCreate()
+    val file_path = "../data/line-item"
+    val directory = new Directory(new File(file_path))
+    directory.deleteRecursively()
+    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 100)
+    val codec = "uncompressed"
+
+    //The following is just a quick fix for tpch query.
+    val lineitem_schema = StructType(Seq(
+      StructField("l_orderkey",IntegerType,false),
+      StructField("l_partkey",IntegerType,false),
+      StructField("l_suppkey",IntegerType,false),
+      StructField("l_linenumber",IntegerType,false),
+      StructField("l_quantity",DoubleType,false),
+      StructField("l_extendedprice",DoubleType,false),
+      StructField("l_discount",DoubleType,false),
+      StructField("l_tax",DoubleType,false),
+      StructField("l_returnflag",StringType,false),
+      StructField("l_linestatus",StringType,false),
+      StructField("l_shipdate",DateType,false),
+      StructField("l_commitdate",DateType,false),
+      StructField("l_receiptdate",DateType,false),
+      StructField("l_shipinstruct",StringType,false),
+      StructField("l_shipmode",StringType,false),
+      StructField("l_comment",StringType,false)
+      ))
+
+    val schema = StructType(Seq(
+      StructField("l_quantity",DoubleType,false),
+      StructField("l_extendedprice",DoubleType,false),
+      StructField("l_discount",DoubleType,false),
+      StructField("l_shipdate",DateType,false),
+     ))
 
     //write it as uncompressed file
-    spark.conf.set("spark.sql.parquet.compression.codec", codec)
-
-    val schema = new StructType()
-      .add(StructField("string", StringType, nullable = false))
-      .add(StructField("number", LongType, nullable = false))
-
+    val file_prefix = "../data/"
     val df = spark.read
-      .options(Map("header" -> "true")) //inferSchema is an expensive operation, but because it's just converted once we don't care
-      .schema(schema)
-      .csv("/Users/fabian/Downloads/taxi-2013.csv")
+      .option("sep", "|")
+      .schema(lineitem_schema)
+      .csv(file_prefix + "lineitem.dat")
       .repartition(1) //we want to have everything in 1 file
       .limit(10000)
+    //val parse = udf { date: String => (10000*date.split('-')(0).toInt +100*date.split('-')(1).toInt+date.split('-')(2).toInt) }
+    //val new_df = createNewDf(df)
+    //df.withColumn("l_shipdate",col("l_shipdate").cast(StringType)).select("l_shipdate").collect.map{case Row(date: String) => (10000*date.split('-')(0).toInt +100*date.split('-')(1).toInt+date.split('-')(1).toInt)}
+    //val df2 = df.withColumn("l_shipdate",parse(col("l_shipdate").cast(StringType)).cast(IntegerType))//.toDF.map{case Row(date: String) => (10000*date.split('-')(0).toInt +100*date.split('-')(1).toInt+date.split('-')(1).toInt)})
+    val df3 = df.select("l_quantity","l_extendedprice","l_discount","l_shipdate")
+    println("Executed Plan:")
+    println(df3.queryExecution.executedPlan)
 
-    // When reading, Spark ignores the nullable property
-    // with this weird conversion we enforce it!
-    val df2 = df.sqlContext.createDataFrame(df.rdd, schema)
-
-    df2.write
-      .parquet(s"../data/taxi-$codec-10000")
-
-    spark.close()
-  }
-
-  ignore("parquet conversion") {
-
-    val codec = "uncompressed"
-
-    val spark = SparkSession
-      .builder()
-      .appName(this.styleName)
-      .config("spark.master", "local")
-      .getOrCreate()
-
-    //write it as uncompressed file
+    //println(schema == df3.schema)
     spark.conf.set("spark.sql.parquet.compression.codec", codec)
-
-    val schema = new StructType()
-      .add(StructField("string", StringType, nullable = false))
-      .add(StructField("number", LongType, nullable = false))
-
-    val df = spark.read
-      .parquet("/work/fnonnenmacher/data/chicago-taxi/taxi-uncompressed.parquet")
-      .repartition(1) //we want to have everything in 1 file
-      .limit(10 * 1000000)
+    
+    val df4 = df3.sqlContext.createDataFrame(df3.rdd, schema)
 
     // When reading, Spark ignores the nullable property
     // with this weird conversion we enforce it!
-    val df2 = df.sqlContext.createDataFrame(df.rdd, schema)
-
-    df2.write
-      .parquet(s"../data/taxi-$codec")
-
+    df4.write
+      .parquet(s"../data/line-item")
     spark.close()
   }
 
-  ignore("filter on regex and sum up int column") {
-
-    //set batch size
-    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
+  test("filter") {
+    //spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 10000)
 
     val query =
-      """ SELECT SUM(`number`)
-        | FROM parquet.`../data/taxi-uncompressed-10000.parquet`
-        | WHERE `string` rlike 'Blue Ribbon Taxi Association Inc.' """.stripMargin
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`../data/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '.06' - '0.01' and '.06' + '0.01'
+          |    and `l_quantity` < '24';
+      """.stripMargin
 
     val sqlDF = spark.sql(query)
+    //DEBUG
+    println("Executed Plan:")
+    println(sqlDF.queryExecution.executedPlan)
 
     assert(sqlDF.queryExecution.executedPlan.find(_.isInstanceOf[ArrowParquetSourceScanExec]).isDefined)
     assert(sqlDF.queryExecution.executedPlan.find(_.isInstanceOf[FletcherReductionExampleExec]).isDefined)
 
-    // DEBUG
-    // println("Executed Plan:")
-    // println(sqlDF.queryExecution.executedPlan)
-
-    assert(sqlDF.first()(0) == 727020)
-
+    //println(sqlDF.collect())
+    //assert(sqlDF.first()(0) == 7494.9288)
+    println(sqlDF.first()(0))
+    println(sqlDF.collect())
     assertArrowMemoryIsFreed()
+
   }
 
-  test("execution"){
-    val res = spark.sql(s""" SELECT SUM(`number`) as `number`
-                                   | FROM parquet.`../data/taxi-uncompressed.parquet`
-                                   | WHERE `string` rlike 'Blue Ribbon Taxi Association Inc.' """.stripMargin)
+  ignore("execution"){
+    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
+    val query =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`../data/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '.06' - '0.01' and '.06' + '0.01'
+          |    and `l_quantity` < '24';
+      """.stripMargin
+    val res = spark.sql(query)
     println(res.collect())
   }
 }

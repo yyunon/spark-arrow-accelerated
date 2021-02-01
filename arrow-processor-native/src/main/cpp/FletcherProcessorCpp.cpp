@@ -10,6 +10,8 @@
 #include <utility>
 #include <unistd.h>
 
+
+
 FletcherProcessorCpp::FletcherProcessorCpp(std::shared_ptr<arrow::Schema> input_schema) {
     schema = std::move(input_schema);
 
@@ -27,24 +29,30 @@ FletcherProcessorCpp::FletcherProcessorCpp(std::shared_ptr<arrow::Schema> input_
 
 }
 
-long trivialCpuVersion(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
+double trivialCpuVersion(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
 
-    auto strings = std::static_pointer_cast<arrow::StringArray>(record_batch->column(0));
-    auto numbers = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(1));
+    auto quantity = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(0));
+    auto ext = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(1));
+    auto discount = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(2));
+    auto shipdate = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(3));
 
-    const int64_t* raw_numbers = numbers->raw_values();
+    const int64_t* ship_date_raw = shipdate->raw_values();
+    const double* discount_raw = discount->raw_values();
+    const double* quantity_raw = quantity->raw_values();
+    const double* ext_raw = ext->raw_values();
 
-    int64_t sum = 0;
-    for (int i = 0; i < record_batch->num_rows(); i++) {
-
-        if (strings->GetString(i) == "Blue Ribbon Taxi Association Inc.") {
-            sum += raw_numbers[i];
-        }
+    double sum = 0;
+    std::cout << "Number of rows are: " << record_batch -> num_rows() << "\n";
+    for (int i = 0; i < record_batch->num_rows(); ++i) {
+      //std::cout << quantity_raw[i] << "," << ext_raw[i] << "," << discount_raw[i] << "," << ship_date_raw[i] << "\n";
+      if(quantity_raw[i] < 24 && ship_date_raw[i] < 19950101 && ship_date_raw[i] >= 19940101 && discount_raw[i] <= 0.061 && discount_raw[i] >= 0.059)
+        sum += ext_raw[i] * discount_raw[i];
     }
+    std::cout << "RESULT returned from ECHO: "<< std::fixed << sum << std::endl;
     return sum;
 }
 
-long FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
+double FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
 
     // Create a context for our application on the platform.
    std::shared_ptr<fletcher::Context> context;
@@ -62,6 +70,10 @@ long FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &rec
 
    // Reset the kernel.
    ASSERT_FLETCHER_OK(kernel.Reset());
+    //The echo platform does not return a proper value -> fallback to cpu impl
+    if (platform->name() == "echo") {
+        return trivialCpuVersion(record_batch);
+    }
 
    // Start the kernel.
    ASSERT_FLETCHER_OK(kernel.Start());
@@ -79,10 +91,6 @@ long FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &rec
 
    std::cout << "RESULT returned from Fletcher: " << *reinterpret_cast<int64_t *>(&return_value_0) << std::endl;
 
-    //The echo platform does not return a proper value -> fallback to cpu impl
-    if (platform->name() == "echo") {
-        return trivialCpuVersion(record_batch);
-    }
     return result;
 }
 
@@ -94,6 +102,8 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_i
 
     std::shared_ptr<arrow::Schema> schema = ReadSchemaFromProtobufBytes(schema_bytes, schema_len);
 
+    std::cout << schema -> ToString(true) << "\n";
+
     return (jlong) new FletcherProcessorCpp(schema);
 }
 
@@ -104,7 +114,7 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_i
  * Method:    reduce
  * Signature: (JI[J[J)J
  */
-JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_reduce
+JNIEXPORT jdouble JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_reduce
         (JNIEnv *env, jobject, jlong process_ptr, jint num_rows, jlongArray in_buf_addrs, jlongArray in_buf_sizes) {
 
     FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
@@ -119,7 +129,7 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_r
     std::shared_ptr<arrow::RecordBatch> in_batch;
     ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema, num_rows, in_addrs, in_sizes, in_buf_len, &in_batch));
 
-    return (jlong) processor->reduce(in_batch);
+    return (jdouble) processor->reduce(in_batch);
 }
 
 JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_close
