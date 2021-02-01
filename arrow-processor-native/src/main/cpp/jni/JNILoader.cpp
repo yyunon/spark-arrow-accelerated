@@ -1,4 +1,4 @@
-/long/
+//long/
 // Called when JNI is loaded (or unloaded)
 // > Triggers other initializations of other classes (e.g. setting static variables)
 //

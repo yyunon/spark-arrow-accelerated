@@ -1,0 +1,74 @@
+# C/C++/CLion stuff
+cmake-build-debug/
+cmake-build-release/
+.idea/
+
+# Typical build folders
+debug/
+release/
+build/
+python-build/
+
+# Python stuff
+*.whl
+
+*.pyc
+.cproject
+.settings/
+.project
+
+# VSIM stuff
+work/
+transcript
+*.vstf
+*.wlf
+
+# GHDL stuff
+*.cf
+
+# Java compiled
+*.class
+
+*.dat
+
+# C++ stuff
+
+# Created by https://www.gitignore.io/api/c++
+### C++ ###
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# End of https://www.gitignore.io/api/c++
+
+.DS_Store
+.vscode/ipch

@@ -85,7 +85,7 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
     spark.close()
   }
 
-  test("filter") {
+  ignore("filter") {
     //spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 10000)
 
     val query =
@@ -111,13 +111,13 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
     //println(sqlDF.collect())
     //assert(sqlDF.first()(0) == 7494.9288)
     println(sqlDF.first()(0))
-    println(sqlDF.collect())
+    //println(sqlDF.collect())
     assertArrowMemoryIsFreed()
 
   }
 
-  ignore("execution"){
-    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
+  test("execution"){
+    //spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
     val query =
       """ select
           |    sum(`l_extendedprice` * `l_discount`) as `revenue`
@@ -130,6 +130,7 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
           |    and `l_quantity` < '24';
       """.stripMargin
     val res = spark.sql(query)
-    println(res.collect())
+    //println(res.collect())
+    println(res.first()(0))
   }
 }
