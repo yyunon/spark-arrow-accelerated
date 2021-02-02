@@ -20,10 +20,15 @@ int findInVector(const std::vector<T> &vecOfElements, const T &element) {
     }
 }
 
-template <class BaseType, size_t FracDigits>
+template <class BaseType>
 inline double fixed_to_float(BaseType input)
 {
-    return ((double)input / (double)(1 << FracDigits));
+    return ((double)input / (double)(1 << 18));
+}
+template <class BaseType>
+inline BaseType float_to_fixed(double input)
+{
+    return (BaseType)((1 << 18) * input);
 }
 template <class BaseType, size_t FracDigits>
 class fixed_point

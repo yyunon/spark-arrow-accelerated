@@ -9,7 +9,7 @@
 
 #include <utility>
 #include <unistd.h>
-
+#include "utils.h"
 
 
 FletcherProcessorCpp::FletcherProcessorCpp(std::shared_ptr<arrow::Schema> input_schema) {
@@ -29,30 +29,35 @@ FletcherProcessorCpp::FletcherProcessorCpp(std::shared_ptr<arrow::Schema> input_
 
 }
 
-double trivialCpuVersion(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
+uint64_t trivialCpuVersion(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
 
-    auto quantity = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(0));
-    auto ext = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(1));
-    auto discount = std::static_pointer_cast<arrow::DoubleArray>(record_batch->column(2));
+    auto quantity = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(0));
+    auto ext = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(1));
+    auto discount = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(2));
     auto shipdate = std::static_pointer_cast<arrow::Int64Array>(record_batch->column(3));
 
     const int64_t* ship_date_raw = shipdate->raw_values();
-    const double* discount_raw = discount->raw_values();
-    const double* quantity_raw = quantity->raw_values();
-    const double* ext_raw = ext->raw_values();
+    const int64_t* discount_raw = discount->raw_values();
+    const int64_t* quantity_raw = quantity->raw_values();
+    const int64_t* ext_raw = ext->raw_values();
 
+    const int64_t quantity_constant = float_to_fixed<int64_t>(24.0);
+    const int64_t discount_up_constant = float_to_fixed<int64_t>(0.061);
+    const int64_t discount_down_constant = float_to_fixed<int64_t>(0.059);
+
+    std::cout << "Constants are: " << quantity_constant << "," << discount_down_constant << ","  << discount_up_constant << "\n";
     double sum = 0;
     std::cout << "Number of rows are: " << record_batch -> num_rows() << "\n";
     for (int i = 0; i < record_batch->num_rows(); ++i) {
       //std::cout << quantity_raw[i] << "," << ext_raw[i] << "," << discount_raw[i] << "," << ship_date_raw[i] << "\n";
-      if(quantity_raw[i] < 24 && ship_date_raw[i] < 19950101 && ship_date_raw[i] >= 19940101 && discount_raw[i] <= 0.061 && discount_raw[i] >= 0.059)
-        sum += ext_raw[i] * discount_raw[i];
+      if(quantity_raw[i] < quantity_constant && ship_date_raw[i] < 19950101 && ship_date_raw[i] >= 19940101 && discount_raw[i] <= discount_up_constant && discount_raw[i] >= discount_down_constant)
+        sum += fixed_to_float<int64_t>(ext_raw[i]) * fixed_to_float<int64_t>(discount_raw[i]);
     }
     std::cout << "RESULT returned from ECHO: "<< std::fixed << sum << std::endl;
-    return sum;
+    return float_to_fixed<int64_t>(sum);
 }
 
-double FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
+uint64_t FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> &record_batch) {
 
     // Create a context for our application on the platform.
    std::shared_ptr<fletcher::Context> context;
@@ -114,7 +119,7 @@ JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_i
  * Method:    reduce
  * Signature: (JI[J[J)J
  */
-JNIEXPORT jdouble JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_reduce
+JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_reduce
         (JNIEnv *env, jobject, jlong process_ptr, jint num_rows, jlongArray in_buf_addrs, jlongArray in_buf_sizes) {
 
     FletcherProcessorCpp *processor = (FletcherProcessorCpp *) process_ptr;
@@ -128,8 +133,7 @@ JNIEXPORT jdouble JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor
 
     std::shared_ptr<arrow::RecordBatch> in_batch;
     ASSERT_OK(make_record_batch_with_buf_addrs(processor->schema, num_rows, in_addrs, in_sizes, in_buf_len, &in_batch));
-
-    return (jdouble) processor->reduce(in_batch);
+    return (jlong) processor->reduce(in_batch);
 }
 
 JNIEXPORT void JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_close

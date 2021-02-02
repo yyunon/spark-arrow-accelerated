@@ -18,7 +18,7 @@ public:
     std::shared_ptr<arrow::Schema> schema;
     explicit FletcherProcessorCpp(std::shared_ptr<arrow::Schema> input_schema);
     ~FletcherProcessorCpp() = default;
-    double reduce(const std::shared_ptr<arrow::RecordBatch> &input);
+    uint64_t reduce(const std::shared_ptr<arrow::RecordBatch> &input);
 };
 
 

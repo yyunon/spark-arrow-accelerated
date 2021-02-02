@@ -42,7 +42,7 @@ case class FletcherReductionExampleExec(out: Seq[Attribute], child: SparkPlan) e
     }
   }
 
-  private def toRow(res: Double): InternalRow = {
+  private def toRow(res: Long): InternalRow = {
     val arr: Array[Any] = Array(res)
     new GenericInternalRow(arr)
   }

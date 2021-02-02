@@ -117,7 +117,7 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
   }
 
   test("execution"){
-    //spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
+    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
     val query =
       """ select
           |    sum(`l_extendedprice` * `l_discount`) as `revenue`
