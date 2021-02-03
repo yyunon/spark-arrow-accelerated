@@ -88,15 +88,31 @@ uint64_t FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> 
 
    uint32_t return_value_0;
    uint32_t return_value_1;
+   uint64_t result;
 
    // Obtain the return value.
    ASSERT_FLETCHER_OK(kernel.GetReturn(&return_value_0, &return_value_1));
 
-   long result = *reinterpret_cast<int64_t *>(&return_value_0);
+   //long result = *reinterpret_cast<int64_t *>(&return_value_0);
+   uint32_t rhigh;
+   uint32_t rlow;
+   for (int i = 0; i < 2; i++) {
+    uint64_t value;
+    uint64_t offset = FLETCHER_REG_SCHEMA + 2 * context->num_recordbatches() + 2 * context->num_buffers() + i;
+    platform->ReadMMIO64(offset, &value);
+    value &= 0xffffffff; //the count registers are 32 bits wide, not 64
+    if(i == 0)
+      rhigh = (uint32_t) value;
+    else
+      rlow = (uint32_t) value;
+   }
+   result = rhigh;
+   result = (result << 32) | rlow;
+   // Print the return value.
+   std::cout << "Return value: " << fixed_to_float(result) << std::endl;
 
-   std::cout << "RESULT returned from Fletcher: " << *reinterpret_cast<int64_t *>(&return_value_0) << std::endl;
 
-    return result;
+   return result;
 }
 
 JNIEXPORT jlong JNICALL Java_nl_tudelft_ewi_abs_nonnenmacher_FletcherProcessor_initFletcherProcessor
