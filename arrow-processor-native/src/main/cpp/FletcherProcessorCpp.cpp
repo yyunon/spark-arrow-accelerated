@@ -3,6 +3,7 @@
 //
 
 #include "FletcherProcessorCpp.h"
+#include <fletcher/api.h>
 #include "jni/Assertions.h"
 #include "jni/Converters.h"
 #include "jni/ProtobufSchemaDeserializer.h"
