@@ -18,6 +18,14 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
 
   override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(ArrowParquetReaderExtension, FletcherReductionExampleExtension)
 
+  def timer[R](function: => R ): (R,Long) = 
+  {
+    val startTime = System.nanoTime()
+    val result = function
+    val endTime = System.nanoTime()
+    (result , (endTime - startTime))
+  }
+
   ignore("Parquet file") {
     val spark = SparkSession
       .builder()
@@ -130,7 +138,9 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
           |    and `l_quantity` < '24';
       """.stripMargin
     val res = spark.sql(query)
+    val (result,t) = timer{res.collect()(0).getLong(0) / Math.pow(2.0,18) } 
     //println(res.collect())
-    println(res.first()(0))
+    println("Result is : " + result)
+    println("Time passed is : " + t.toDouble / 1000000000f)
   }
 }
