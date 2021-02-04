@@ -20,6 +20,9 @@ object NativeLibraryLoader {
         System.loadLibrary("ocxl")
         System.load("fletcher_snap")
       }
+      case "AWS" => {
+        System.loadLibrary("fletcher_aws")
+      }
       case other => throw new Exception(s"Fletcher platform '$other' not supported.")
     }
 

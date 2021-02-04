@@ -21,9 +21,9 @@ dependencies {
     compile "org.apache.arrow:arrow-vector:$arrowVersion"
 
 
-    if (isFamily(FAMILY_MAC)) {
-        compile "org.apache.arrow.gandiva:arrow-gandiva:$arrowVersion"
-    } else {
+    //if (isFamily(FAMILY_MAC)) {
+    //    compile "org.apache.arrow.gandiva:arrow-gandiva:$arrowVersion"
+    //} else {
         // The arrow gandiva library on central maven only includes the native libraries for MacOs
         // therefore on Linux the self-build version has to be used
         def gandivaJarDir = System.getenv("GANDIVA_JAR_DIR") ?: { throw new Exception("The env variable GANDIVA_JAR_DIR is not set. Cannot find gandiva jar file ") }()
@@ -42,12 +42,12 @@ dependencies {
             // therefore we changed the version manually and have to use here the same
             compile "com.google.protobuf:protobuf-java:3.7.1"
         } else {
-            compile "com.google.protobuf:protobuf-java:2.5.0"
+            compile "com.google.protobuf:protobuf-java:3.7.1"
         }
         compile "org.apache.arrow:arrow-memory:$arrowVersion"
         compile "org.apache.arrow:arrow-vector:$arrowVersion"
         compile "org.slf4j:slf4j-api:1.7.25"
-    }
+    //}
 
     //USE JUnit 4 instead of 5 because scalatest is not compatible with jUni5
     testCompile 'org.scalatest:scalatest_2.12:3.0.1'

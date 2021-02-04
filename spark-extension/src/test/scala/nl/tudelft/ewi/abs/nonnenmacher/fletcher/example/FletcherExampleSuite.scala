@@ -122,7 +122,7 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
       """ select
           |    sum(`l_extendedprice` * `l_discount`) as `revenue`
       from
-          |    parquet.`../data/lineitem.parquet`
+          |    parquet.`/home/centos/dataset_generation/parquet/1sf/lineitem.parquet`
       where
           |    `l_shipdate` >= '19940101'
           |    and `l_shipdate` < '19950101'

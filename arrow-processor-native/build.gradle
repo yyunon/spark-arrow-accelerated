@@ -45,6 +45,9 @@ Task generateProtobuf = task generateProtobuf(type: Exec) {
 library {
     def findLib = new LibFinder();
 
+    targetMachines = [
+    machines.linux.x86_64
+    ]
     if (isArch("ppc64le")){
         // Gradle cannot handle the power systems architecture automatically, therefore we tell them to use the classic linux toolChain
         //probably not the best/cleanest way to do it, but it seems to work
@@ -91,6 +94,7 @@ library {
         linkTask.get().lib(findLib("arrow_dataset"))
         linkTask.get().lib(findLib("arrow"))
         linkTask.get().lib(findLib("fletcher"))
+        linkTask.get().lib(findLib("fletcher_aws"))
         linkTask.get().lib(findLib("parquet"))
     }
 }
