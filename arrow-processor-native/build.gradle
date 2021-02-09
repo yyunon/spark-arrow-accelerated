@@ -37,8 +37,10 @@ Task generateProtobuf = task generateProtobuf(type: Exec) {
 
     commandLine "protoc"
 
-    args('--proto_path', projectDir.absolutePath)
     args('--cpp_out', outputs.files[0].absolutePath)
+    args('--proto_path', '/home/centos/spark-arrow-accelerated/arrow-processor-native')
+    //args('--proto_path', projectDir.absolutePath)
+    //args('--cpp_out', outputs.files[0].absolutePath)
     args(filename)
 }
 

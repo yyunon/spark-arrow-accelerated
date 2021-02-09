@@ -110,7 +110,7 @@ uint64_t FletcherProcessorCpp::reduce(const std::shared_ptr<arrow::RecordBatch> 
    result = rhigh;
    result = (result << 32) | rlow;
    // Print the return value.
-   std::cout << "Return value: " << fixed_to_float(result) << std::endl;
+   //std::cout << "Return value: " << fixed_to_float(result) << std::endl;
 
 
    return result;

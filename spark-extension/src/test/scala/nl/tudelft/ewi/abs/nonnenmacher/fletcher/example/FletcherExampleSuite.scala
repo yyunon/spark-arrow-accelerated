@@ -1,10 +1,14 @@
 package nl.tudelft.ewi.abs.nonnenmacher.fletcher.example
+import scala.collection.mutable
 
 import nl.tudelft.ewi.abs.nonnenmacher.SparkSessionGenerator
+import org.apache.spark.sql.execution.aggregate._
 import nl.tudelft.ewi.abs.nonnenmacher.parquet.{ArrowParquetReaderExtension, ArrowParquetSourceScanExec}
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{SparkSession, SparkSessionExtensions}
+import org.apache.spark.sql.util.QueryExecutionListener
+import org.apache.spark.sql.execution.{FileSourceScanExec, QueryExecution}
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
@@ -15,8 +19,12 @@ case class Employee(name: String, age: Long)
 
 @RunWith(classOf[JUnitRunner])
 class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
+  final val MILLION: Int = 1000000
 
   override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(ArrowParquetReaderExtension, FletcherReductionExampleExtension)
+  //override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(ArrowParquetReaderExtension, FletcherReductionExampleExtension)
+  //override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(FletcherReductionExampleExtension)
+  //override def withExtensions: Seq[SparkSessionExtensions => Unit] = Seq(ArrowParquetReaderExtension)
 
   def timer[R](function: => R ): (R,Long) = 
   {
@@ -125,8 +133,88 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
   }
 
   test("execution"){
-    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 500)
-    val query =
+    val metrics: mutable.MutableList[Seq[Long]] = mutable.MutableList()
+    spark.sqlContext.listenerManager.register(new QueryExecutionListener {
+      override def onSuccess(funcName: String, qe: QueryExecution, durationNs: Long): Unit = {
+
+        var scanTime = 0L;
+        var hashTime = 0L;
+        var aggregationTime = 0L;
+
+        qe.executedPlan.foreach {
+          case fs@FileSourceScanExec(_, _, _, _, _, _, _) => fs.metrics.get("scanTime").foreach(m => scanTime += m.value)
+          case ns@ArrowParquetSourceScanExec(_, _, _) => ns.metrics.get("scanTime").foreach(m => scanTime += (m.value / MILLION))
+          case g@FletcherReductionExampleExec(_, _) => g.metrics.get("aggregationTime").foreach(m => aggregationTime += m.value / MILLION)
+          case h@HashAggregateExec(_, _, _, _, _, _, _) => h.metrics.get("aggTime").foreach(m => hashTime += m.value)
+          case _ =>
+        }
+
+        metrics += Seq[Long](hashTime, scanTime, aggregationTime, durationNs / MILLION)
+        println(scanTime)
+        println(durationNs/MILLION)
+      }
+
+      override def onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit = {}
+    })
+
+
+    spark.conf.set("spark.sql.inMemoryColumnarStorage.batchSize", 1000000)
+    val query1 =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/10sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val query2 =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/10sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val query3 =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/20sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val query4 =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/30sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val query5 =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/40sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val query6 =
       """ select
           |    sum(`l_extendedprice` * `l_discount`) as `revenue`
       from
@@ -134,13 +222,45 @@ class FletcherExampleSuite extends FunSuite with SparkSessionGenerator {
       where
           |    `l_shipdate` >= '19940101'
           |    and `l_shipdate` < '19950101'
-          |    and `l_discount` between '.06' - '0.01' and '.06' + '0.01'
-          |    and `l_quantity` < '24';
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
       """.stripMargin
-    val res = spark.sql(query)
-    val (result,t) = timer{res.collect()(0).getLong(0) / Math.pow(2.0,18) } 
-    //println(res.collect())
-    println("Result is : " + result)
-    println("Time passed is : " + t.toDouble / 1000000000f)
+    var res1 = spark.sql(query1)
+    var result1 = spark.time(res1.collect()(0).getLong(0) / Math.pow(2.0,18))
+    res1 = spark.sql(query1)
+    result1 = spark.time(res1.collect()(0).getLong(0) / Math.pow(2.0,18))
+    res1 = spark.sql(query1)
+    result1 = spark.time(res1.collect()(0).getLong(0) / Math.pow(2.0,18))
+    //val res2 = spark.sql(query2)
+    //val result2 = spark.time(res2.collect()(0).getLong(0) / Math.pow(2.0,18))
+    //println("Result of q1 is : " + result2)
+    //println(metrics)
+    spark.catalog.clearCache()
+    spark.sqlContext.clearCache()
+    val res3 = spark.sql(query3)
+    val result3 = spark.time(res3.collect()(0).getLong(0) / Math.pow(2.0,18))
+    println("Result of q2 is : " + result3)
+    println(metrics)
+    spark.catalog.clearCache()
+    spark.sqlContext.clearCache()
+    val res4 = spark.sql(query4)
+    val result4 = spark.time(res4.collect()(0).getLong(0) / Math.pow(2.0,18))
+    println("Result of q3 is : " + result4)
+    println(metrics)
+    spark.catalog.clearCache()
+    spark.sqlContext.clearCache()
+    val res5 = spark.sql(query5)
+    val result5 = spark.time(res5.collect()(0).getLong(0) / Math.pow(2.0,18))
+    println("Result of q4 is : " + result5)
+    println(metrics)
+    //val res6 = spark.sql(query6)
+    //val result6 = spark.time(res6.collect()(0).getLong(0) / Math.pow(2.0,18))
+    //println("Result of q5 is : " + result6)
+    //println(metrics)
+    //val res7 = spark.sql(query6)
+    //val result7 = spark.time(res7.collect()(0).getLong(0) / Math.pow(2.0,18))
+    //println("Result of q4 is : " + result7)
+    //println(metrics)
+    //println("Time passed is : " + t.toDouble / 1000000000f)
   }
 }

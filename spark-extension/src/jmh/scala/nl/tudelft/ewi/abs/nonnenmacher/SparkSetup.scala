@@ -21,27 +21,27 @@ object SparkSetup {
 
   //It is with JMH and Scala easier to use predefined strings, then an enum
   final val VANILLA = "VANILLA"
-  final val ARROW_PARQUET = "ARROW_PARQUET"
-  final val ARROW_PARQUET_WITH_MAX_AGGREGATION = "ARROW_PARQUET_MAX"
-  final val PARQUET_AND_GANDIVA = "PARQUET_AND_GANDIVA"
-  final val PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION = "PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION"
+  //final val ARROW_PARQUET = "ARROW_PARQUET"
+  //final val ARROW_PARQUET_WITH_MAX_AGGREGATION = "ARROW_PARQUET_MAX"
+  //final val PARQUET_AND_GANDIVA = "PARQUET_AND_GANDIVA"
+  //final val PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION = "PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION"
   final val FLETCHER = "FLETCHER"
 
   private def extensionOf(s: String): Seq[SparkSessionExtensions => Unit] = s match {
     case VANILLA => Seq()
-    case ARROW_PARQUET =>
-      Seq(ArrowParquetReaderExtension)
-    case ARROW_PARQUET_WITH_MAX_AGGREGATION =>
-      Seq(ArrowParquetReaderExtension,
-        SimpleMaxAggregationExtension)
-    case PARQUET_AND_GANDIVA =>
-      Seq(ArrowParquetReaderExtension,
-        GandivaExtension,
-        ArrowColumnarExtension)
-    case PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION =>
-      Seq(ArrowParquetReaderExtension,
-        GandivaExtension,
-        SimpleMaxAggregationExtension)
+    //case ARROW_PARQUET =>
+    //  Seq(ArrowParquetReaderExtension)
+    //case ARROW_PARQUET_WITH_MAX_AGGREGATION =>
+    //  Seq(ArrowParquetReaderExtension,
+    //    SimpleMaxAggregationExtension)
+    //case PARQUET_AND_GANDIVA =>
+    //  Seq(ArrowParquetReaderExtension,
+    //    GandivaExtension,
+    //    ArrowColumnarExtension)
+    //case PARQUET_AND_GANDIVA_WITH_MAX_AGGREGATION =>
+    //  Seq(ArrowParquetReaderExtension,
+    //    GandivaExtension,
+    //    SimpleMaxAggregationExtension)
     case FLETCHER =>
       Seq(ArrowParquetReaderExtension,
         FletcherReductionExampleExtension)
@@ -84,9 +84,9 @@ object SparkSetup {
         qe.executedPlan.foreach {
           case fs@FileSourceScanExec(_, _, _, _, _, _, _) => fs.metrics.get("scanTime").foreach(m => scanTime = m.value)
           case ns@ArrowParquetSourceScanExec(_, _, _) => ns.metrics.get("scanTime").foreach(m => scanTime = (m.value / MILLION))
-          case g@GandivaFilterExec(_, _) => g.metrics.get("time").foreach(m => gandiva += m.value / MILLION)
+          //case g@GandivaFilterExec(_, _) => g.metrics.get("time").foreach(m => gandiva += m.value / MILLION)
           case g@FletcherReductionExampleExec(_, _) => g.metrics.get("aggregationTime").foreach(m => aggregationTime += m.value / MILLION)
-          case g@GandivaProjectExec(_, _) => g.metrics.get("time").foreach(m => gandiva += m.value / MILLION)
+          //case g@GandivaProjectExec(_, _) => g.metrics.get("time").foreach(m => gandiva += m.value / MILLION)
           case g@SimpleMaxAggregationExec(_) => {
             g.metrics.get("aggregationTime").foreach(m => aggregationTime = m.value / MILLION)
             g.metrics.get("processing").foreach(m => processing = m.value / MILLION)

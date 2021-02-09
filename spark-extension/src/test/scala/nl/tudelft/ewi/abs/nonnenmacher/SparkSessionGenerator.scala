@@ -15,7 +15,9 @@ trait SparkSessionGenerator extends BeforeAndAfterAll {
     }
 
     builder.appName(this.styleName)
-      .config("spark.master", "local")
+      .config("spark.master", "local[1]")
+      .config("spark.driver.memory", "16g")
+      .config("spark.sql.parquet.filterPushdown", false)
       .getOrCreate()
   }
 

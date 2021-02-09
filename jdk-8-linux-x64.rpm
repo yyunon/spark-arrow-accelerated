@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+   <head>
+		
+	<title>Java SE Development Kit 8 - Downloads</title>
+	 
+	<meta name="Title" content="Java SE Development Kit 8 - Downloads">
+	
+		<meta name="Description" content="Download JDK 8, a development environment for building applications and components using the Java programming language.">
+	
+	<meta name="Keywords" content="Java JavaSE JDK JDK8">
+	
+<!-- Container/Display Start -->
+
+<!-- _Raw-Text -->
+	<!-- css / js files start -->
+	<script>
+	!function(){
+		var d=document.documentElement;d.className=d.className.replace(/no-js/,'js');
+		if(document.location.href.indexOf('betamode=') > -1) document.write('<script src="https://www.oracle.com/asset/web/js/ocom-betamode.js"><\/script>');
+	}();
+	</script>
+	<link data-wscss href="https://www.oracle.com/asset/web/css/ocom-v1-base.css" rel="stylesheet">
+	<link data-wscss href="https://www.oracle.com/asset/web/css/ocom-v1-styles.css" rel="preload" as="style" onload="this.rel='stylesheet'" onerror="this.rel='stylesheet'">
+	<noscript>
+	   <link href="https://www.oracle.com/asset/web/css/ocom-v1-styles.css" rel="stylesheet">
+	</noscript>
+	<link data-wsjs data-reqjq href="https://www.oracle.com/asset/web/js/ocom-v1-base.js" rel="preload" as="script">
+    <link data-wsjs data-reqjq href="https://www.oracle.com/asset/web/js/ocom-v1-lib.js" rel="preload" as="script">
+    <script data-wsjs src="https://www.oracle.com/asset/web/js/jquery-min.js" async onload="$('head link[data-reqjq][rel=preload]').each(function(){var a = document.createElement('script');a.async=false;a.src=$(this).attr('href');this.parentNode.insertBefore(a, this);});$(function(){$('script[data-reqjq][data-src]').each(function(){this.async=true;this.src=$(this).data('src');});});"></script>
+	<!-- end css / js files start -->
+<!-- / _Raw-Text -->
+
+<!-- Container/Display end -->
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<meta name="siteid" content="us">
+	<meta name="countryid" content="US">
+	
+	<meta name="robots" content="index, follow">
+	
+	<meta name="country" content="United States">
+	<meta name="Language" content="en">
+	<meta name="Updated Date" content="2019-03-04T20:06:36Z">
+	
+	<script type="text/javascript">
+		var pageData = pageData || {};
+		//page info
+		pageData.pageInfo = pageData.pageInfo || {};
+		pageData.pageInfo.language = "en";
+		pageData.pageInfo.country = "United States";
+		pageData.pageInfo.pageTitle = "Java SE Development Kit 8 - Downloads";
+		pageData.pageInfo.description = "Download JDK 8, a development environment for building applications and components using the Java programming language.";
+		pageData.pageInfo.keywords = "Java JavaSE JDK JDK8";
+		pageData.pageInfo.siteId = "us";
+		pageData.pageInfo.countryId = "US";
+		pageData.pageInfo.updatedDate = "2019-03-04T20:06:36Z";
+	</script>
+	<!-- start : ocom/common/global/components/seo-taxonomy-meta-data-->
+	
+	<script type="text/javascript">
+		var pageData = pageData || {};
+		//taxonmy
+		pageData.taxonomy = pageData.taxonomy || {};
+		pageData.taxonomy.productServices = [];
+		pageData.taxonomy.industry = [];
+		pageData.taxonomy.region = [];
+		pageData.taxonomy.contentType = [];
+		pageData.taxonomy.buyersJourney = [];
+		pageData.taxonomy.revenue = [];
+		pageData.taxonomy.title = [];
+		pageData.taxonomy.audience = [];
+		pageData.taxonomy.persona = [];
+	</script>
+<!-- end : ocom/common/global/components/seo-taxonomy-meta-data-->
+<!-- start : ocom/common/global/components/social-media-meta-tags -->
+<!-- end : ocom/common/global/components/social-media-meta-tags -->
+<!-- start : ocom/common/global/components/seo-hreflang-meta-tags --><link rel="canonical" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" />
+					<link rel="alternate" hreflang="en-AE" href="https://www.oracle.com/ae/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="es-AR" href="https://www.oracle.com/ar/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-AU" href="https://www.oracle.com/au/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-BE" href="https://www.oracle.com/be/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="pt-BR" href="https://www.oracle.com/br/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-CA" href="https://www.oracle.com/ca-en/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="fr-CA" href="https://www.oracle.com/ca-fr/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="de-CH" href="https://www.oracle.com/ch-de/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="fr-CH" href="https://www.oracle.com/ch-fr/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="es-CL" href="https://www.oracle.com/cl/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="zh-CN" href="https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="es-CO" href="https://www.oracle.com/co/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="cs-CZ" href="https://www.oracle.com/cz/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="de-DE" href="https://www.oracle.com/de/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-US" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="es-ES" href="https://www.oracle.com/es/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="fr-FR" href="https://www.oracle.com/fr/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-HK" href="https://www.oracle.com/hk/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-ID" href="https://www.oracle.com/id/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-IE" href="https://www.oracle.com/ie/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-IN" href="https://www.oracle.com/in/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="it-IT" href="https://www.oracle.com/it/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="ja-JP" href="https://www.oracle.com/jp/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="ko-KR" href="https://www.oracle.com/kr/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="es-MX" href="https://www.oracle.com/mx/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="nl-NL" href="https://www.oracle.com/nl/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-PH" href="https://www.oracle.com/ph/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="pl-PL" href="https://www.oracle.com/pl/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="pt-PT" href="https://www.oracle.com/pt/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="ro-RO" href="https://www.oracle.com/ro/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="ru-RU" href="https://www.oracle.com/ru/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-SA" href="https://www.oracle.com/sa/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="sv-SE" href="https://www.oracle.com/se/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-SG" href="https://www.oracle.com/sg/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="sk-SK" href="https://www.oracle.com/sk/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="tr-TR" href="https://www.oracle.com/tr/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="zh-TW" href="https://www.oracle.com/tw/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-GB" href="https://www.oracle.com/uk/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<link rel="alternate" hreflang="en-ZA" href="https://www.oracle.com/za/java/technologies/javase/javase-jdk8-downloads.html" />
+					
+					<meta name="altpages" content="ae,ar,au,be,br,ca-en,ca-fr,ch-de,ch-fr,cl,cn,co,cz,de,es,fr,hk,id,ie,in,it,jp,kr,mx,nl,ph,pl,pt,ro,ru,sa,se,sg,sk,tr,tw,uk,za">
+					<script type="text/javascript">
+						var pageData = pageData || {};
+						//page info
+						pageData.pageInfo = pageData.pageInfo || {};
+						pageData.pageInfo.altPages = "ae,ar,au,be,br,ca-en,ca-fr,ch-de,ch-fr,cl,cn,co,cz,de,es,fr,hk,id,ie,in,it,jp,kr,mx,nl,ph,pl,pt,ro,ru,sa,se,sg,sk,tr,tw,uk,za";
+					</script>
+				<!-- end : ocom/common/global/components/seo-hreflang-meta-tags -->
+
+<!-- Container/Display Start -->
+
+<!-- _Raw-Text -->
+<!-- www-us HeadAdminContainer -->
+<link rel="icon" href="https://www.oracle.com/asset/web/favicons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="https://www.oracle.com/asset/web/favicons/favicon-128.png" sizes="128x128">
+<link rel="icon" href="https://www.oracle.com/asset/web/favicons/favicon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://www.oracle.com/asset/web/favicons/favicon-120.png" sizes="120x120">
+<link rel="apple-touch-icon" href="https://www.oracle.com/asset/web/favicons/favicon-152.png" sizes="152x152">
+<link rel="apple-touch-icon" href="https://www.oracle.com/asset/web/favicons/favicon-180.png" sizes="180x180">
+<meta name="msapplication-TileColor" content="#fcfbfa"/>
+<meta name="msapplication-square70x70logo" content="favicon-128.png"/>
+<meta name="msapplication-square150x150logo" content="favicon-270.png"/>
+<meta name="msapplication-TileImage" content="favicon-270.png"/>
+<meta name="msapplication-config" content="none"/>
+<script async="async" type="text/javascript" src='//consent.truste.com/notice?domain=oracle.com&c=teconsent&js=bb&noticeType=bb&text=true&gtm=1&cdn=1&pcookie' crossorigin></script>
+
+<style>
+#oReactiveChatContainer1 { display:none;}
+</style>
+<!--DTM embed code - Header -->
+<script src="//assets.adobedtm.com/6f37a0dc9cdbe818dc4979828b58b88e3f060ea4/satelliteLib-e598c5b61e39a10b402e048e87dd27b0f1cd2d4c.js"></script>
+
+<!-- Truste for RU -->
+<script type="text/javascript">
+ if (location.pathname.indexOf("/ru/") == 0){
+ document.write('\x3Cscript async="async" src=//consent.truste.com/notice?domain=oracleru.com&c=teconsent&js=bb&noticeType=bb&text=true&gtm=1&cdn=1&pcookie crossorigin="">\x3C/script>');
+ }
+ </script>
+<!--End-->
+
+<!-- / _Raw-Text -->
+
+<!-- Container/Display end -->
+
+   
+  <script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false"}]);</script>
+                          <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="DXNLE-YBWWY-AR74T-WMD99-77VRA",function(){function e(){if(!o){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,i.parentNode.appendChild(e),o=!0}}function t(e){o=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(i.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",i.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(c){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"DXNLE-YBWWY-AR74T-WMD99-77VRA";var i=document.currentScript||document.getElementsByTagName("script")[0],o=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!o)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),i.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="elqayvdiit3leyax6saq-f-aac0d66a0-clientnsv4-s.akamaihd.net",i={"ak.v":"30","ak.cp":"82485","ak.ai":parseInt("604074",10),"ak.ol":"0","ak.cr":0,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"8f2c04a","ak.r":30888,"ak.a2":n,"ak.m":"dscx","ak.n":"essl","ak.bpcip":"34.224.12.0","ak.cport":46754,"ak.gh":"23.201.31.159","ak.quicv":"","ak.tlsv":"tls1.2","ak.0rtt":"","ak.csrc":"-","ak.acc":"reno","ak.t":"1612182657","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==ZF6jSN/pmNKGi4fdHRanIeIWs7iGqxwZzxQ4QHhm5RSTysxvNcB0qUnij3xZmdR3dbUcY1qWuKul5kklKqbcMiWTWC09uNwy0JX5m8aZLlMLQl/2U7zVFnJEkzPpG8/7kFheLLSZG+IvzTRlqltQeoe2t4Pe4ZFOGq9kHtLvTwku8XrdJJBQjnRViWBUShynM8OR9zUc074n+ZO09/NpwcRJdFXxJaLCpbmz3jcCWMVBx7gPKW+Iq8YsqfFc/saRMy8hlLld6hG8AtdRpgbHkM3t1CSTSSMmZy0PJ3TGi3kWHy8k3H8phooRagKYRGzePh10nG0Cb4cQkhTYPRFQ7DCC+fhwL5W7kVwKyGHBopiafGX2Fp0VPwYxObETR76vXjoxJOiIwv8N59x6RzPeybPoeTAjTL+OzRL6mgrFlD4=","ak.pv":"184","ak.dpoabenc":""};if(""!==t)i["ak.ruds"]=t;var o={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:a,init:function(){if(!o.i){var e=BOOMR.subscribe;e("before_beacon",o.av,null,null),e("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+   
+   <body class="f11 f11v6">
+   		
+		<div class="f11w1">
+			
+<!-- start Common/Header -->
+ 
+	<!-- Dispatcher:null -->
+	
+<!-- BEGIN: oWidget_C/_Raw-Text/Display -->
+<!-- U28v1 -->
+<section class="u28 u28v1 u28adj" id="u28" data-trackas="header">
+	<div class="u28w1">
+		<div class="cwidth">
+			<div class="u28s1" id="u28s1">
+				<a class="u28home rw-logo" href="/" data-lbl="logo">home</a>
+				<a class="u28ham" href="/universal-menu/" data-lbl="menu">nav</a>
+			</div>
+			<div class="u28s2">
+				<div class="u28w2">
+					<form name="askoracle" id="askoracle" class="askoracle" data-contentpaths="/content/Web/Shared/Auto-Suggest Panel Event" method="get" action="/search/results" data-resultsclose="Close" data-resultscloselabel="Exit Search Results">
+						<input type="hidden" name="Nty" value="1">
+						<input type="hidden" name="Dy" value="1">
+						<input type="hidden" name="Ntk" value="SI-ALL5">
+						<input type="hidden" name="cty" value="us">
+						<input type="hidden" name="lang" value="en">
+						<div class="u28w3">
+							<div class="u28logo rw-logo">
+								<span>Oracle</span>
+							</div>
+							<a class="u28-back rw-cv-left" href="#back" title="Close Search Field">
+								<span>Close</span>
+							</a>
+							<a class="u28-searchicon" href="#search">
+								<span>Search</span>
+							</a>
+							<span class="u28input">
+								<input id="askoracleinput" name="Ntt" value="" data-prefix="Ask" placeholder="Ask" autocomplete="off" role="combobox" aria-label="Search Oracle.com">
+								<span class="u28submit">
+									<input class="u28searchbttn" type="submit" value="Submit Search">
+								</span>
+							</span>
+						</div>
+					</form>
+				</div>
+
+			</div>
+
+			<nav class="u28s4">
+				<a class="u28search u28navitm" id="u28search" aria-label="Open Search Field" href="#search"><span>Search</span></a>
+				<a href="#products" data-target="products" class="u28navitm">Products</a>
+				<a href="#industries" data-target="industries" class="u28navitm">Industries</a>
+				<a href="#resources" data-target="resources" class="u28navitm">Resources</a>
+				<a href="#support" data-target="support" class="u28navitm">Support</a>
+				<a href="#events" data-target="events" class="u28navitm">Events</a>
+				<a href="#developer" data-target="developer" class="u28navitm">Developer</a>
+			</nav>
+
+			<div class="u28s3" id="u28s3">
+
+				<div class="u28-profile">
+					<a href="#" class="u28prof" data-lbl="sign-in-account" title="View Accounts"><div class="acttxt">View Accounts</div><span>Sign In</span></a>
+					<div class="u28-profilew1">
+					<span class="u28actbck u28back">Back</span>
+						<span class="u28acttitle">Oracle Account</span>
+						<div class="u28-profilew2">
+							<span class="u28acttitle">Cloud Account</span>
+							<a href="/cloud/sign-in.html" class="u28cloudbg" data-lbl="go-to-cloud-website" aria-label="Sign in to Cloud">Sign in to Cloud</a>
+							<a href="/cloud/free/?source=:ow:o:h:nav:OHP0625ViewAccountsButton&intcmp=:ow:o:h:nav:OHP0625ViewAccountsButton" class="u28btn2" data-lbl="cta-0625-nav-header-accounts-free-tier-oci" aria-label="Sign Up for Free Cloud Tier">Sign Up for Free Cloud Tier</a></li>
+						</div>
+						<ul class="u28l-out">
+							<li><a href="https://www.oracle.com/webapps/redirect/signon?nexturl=" data-lbl="profile:sign-in-account" class="u28btn1">Sign-In</a></li>
+							<li><a href="https://profile.oracle.com/myprofile/account/create-account.jspx" data-lbl="profile:create-account" class="u28btn2">Create an Account</a></li>
+						</ul>
+						<ul class="u28l-in">
+							<li><a href="/corporate/contact/help.html" data-lbl="help">Help</a></li>
+							<li><a href="javascript:sso_sign_out();" id="u28pfile-sout" data-lbl="signout">Sign Out</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="u28-contact">
+					<a href="/corporate/contact/" class="u28contact" data-lbl="contact-sales" title="Contact Sales"><span>Contact Sales</span></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="u28w4" id="u28w4">
+		<div class="u28w1a u28w5 clstrgt">
+			<div class="u28w6">
+
+				<!-- Search Results -->
+				<div class="u28w8 u28trgt"></div>
+				<div class="u28w9">
+					<div class="u28result u28noresults">
+						<div class="u28rw1">
+							<div class="u28rw2">
+								<h4>No results found</h4>
+								<p>Your search did not match any results.</p>
+								<p>We suggest you try the following to help find what you&rsquo;re looking for:</p>
+								<ul class="u28w7a">
+									<li>Check the spelling of your keyword search.</li>
+									<li>Use synonyms for the keyword you typed, for example, try &ldquo;application&rdquo; instead of &ldquo;software.&rdquo;</li>
+									<li>Try one of the popular searches shown below.</li>
+									<li>Start a new search.</li>
+								</ul>
+								<h5>Trending Questions</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<nav id="u28nav" class="u28nav" data-trackas="menu">
+		<a href="#close" class="mnavback u28back icn-close">Close</a>
+	</nav>
+
+</section>
+<!-- /U28v1 -->
+
+
+
+<!-- END: oWidget_C/_Raw-Text/Display -->
+
+<!-- end Common/Header -->
+
+<!-- U03v5 -->
+
+	<nav class="u03 u03v5 u03bttns" data-trackas="breadcrumb" data-ocomid="u03">
+		<div class="cwidth">
+			<div class="u03w1">
+				<ul>
+					
+						<li><a href="https://www.oracle.com/java/">Java</a></li>
+						
+						<li><a href="https://www.oracle.com/java/technologies/">Technical Details</a></li>
+						
+						<li><a href="/java/technologies/java-se-glance.html">Java SE</a></li>
+						
+				</ul>
+				<h1>Java SE Development Kit 8 Downloads</h1>
+			</div>
+			
+				<div class="u03w2">
+					
+<!-- _Raw-Text -->
+<div class="u03w2"> <div class="obttns"> <div class="obttn5"> <a href="https://www.oracle.com/java/java-se-subscription.html">Java SE Subscriptions</a>  </div> <div class="obttn5"> <a href="/java/technologies/javase-downloads.html">Java SE Downloads</a>  </div></div>
+</div>
+<!-- / _Raw-Text -->
+
+				</div>
+			
+		</div>
+		<script type="text/javascript">
+			var pageData = pageData || {};
+			//page info
+			pageData.pageInfo = pageData.pageInfo || {};
+			pageData.pageInfo.breadCrumbs = "Java / Technical Details / Java SE";
+		</script>
+	</nav>	
+	
+<!-- _Raw-Text -->
+<script type="text/javascript">
+document.cookie ="oraclelicense=;"
+</script>
+<!-- / _Raw-Text -->
+
+<!-- _Raw-Text -->
+
+
+<section class="cc01 cc01v0 cpad">
+   <div class="cc01w1 cwidth">
+      <h3>Java SE Development Kit 8 Downloads</h3>
+      <p>Thank you for downloading this release of the Java™ Platform, Standard Edition Development Kit (JDK™). The JDK is a development environment for building applications, applets, and components using the Java programming language.</p>
+      <p>The JDK includes tools useful for developing and testing programs written in the Java programming language and running on the Java platform.</p>
+   </div>
+</section>
+<section class="cb104 cb104v1 cpad" data-trackas="cb104" data-ocomid="cb104">
+   <div class="cb104w1 cwidth">
+      <div class="col-item">
+         <div class="col-item-w1 bglightgreen">
+            <h4>Important Oracle JDK License Update</h4>
+            <p><strong>The Oracle JDK License has changed for releases starting April 16, 2019.</strong></p>
+            <p>
+               The new <a href="/downloads/licenses/javase-license1.html">Oracle Technology Network License Agreement for Oracle Java SE</a> is substantially different from prior Oracle JDK licenses. The new license permits certain uses, such as personal use and development use, at no cost -- but other uses authorized under prior Oracle JDK licenses may no longer be available. Please review the terms carefully before downloading and using this product. An FAQ is available <a href="/java/technologies/javase/jdk-faqs.html">here</a>.
+            </p>
+            <p>
+               Commercial license and support is available with a low cost <a href="/java/java-se-subscription.html">Java SE Subscription</a>.
+            </p>
+            <p>
+               Oracle also provides the latest OpenJDK release under the open source <a href="https://openjdk.java.net/legal/gplv2+ce.html">GPL License</a> at <a href="https://jdk.java.net/"> jdk.java.net</a>.
+            </p>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="cc01 cc01v0 cpad">
+   <div class="cc01w1 cwidth">
+   <p>See also:</p>
+   <ul class="cta-list">
+      <li><a href="https://profile.oracle.com/myprofile/account/secure/update-account.jspx">Java Developer Newsletter</a>: From your Oracle account, select <strong>Subscriptions</strong>, expand <strong>Technology</strong>, and subscribe to <strong>Java</strong>.</li>
+      <li><a href="//www.oracle.com/search/events">Java Developer Day hands-on workshops (free) and other events</a></li>
+      <li><a href="https://blogs.oracle.com/javamagazine/">Java Magazine</a></li>
+   </ul>
+   <p>JDK 8u281 <a target="" href="//www.oracle.com/webfolder/s/digest/8u281checksum.html">checksum </a></p>
+</section>
+<section class="cb133 cb133v0 cpad" data-licenses="/a/ocom/docs/download-licenses.json" data-ocomid="cb133" data-trackas="cb133">
+   <div class="cb133w1 cwidth">
+    <a id="JDK" name="JDK"></a>
+      <h4> Java SE Development Kit 8u281</h4>
+      <p>This software is licensed under the <a href="/downloads/licenses/javase-license1.html" target="_blank">Oracle Technology Network License Agreement for Oracle Java SE</a></p>
+      <div class="otable otable-scrolling" data-ocomid="otable">
+         <div class="otable-w1">
+            <table class="otable-w2">
+               <thead>
+                  <tr>
+                     <th class="otable-col-head">
+                        <h3>Product / File Description</h3>
+                     </th>
+                     <th class="otable-col-head">
+                        <h3>File Size</h3>
+                     </th>
+                     <th class="otable-col-head">
+                        <h3>Download</h3>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+			   
+                  <tr>
+                     <td>Linux ARM 64 RPM Package</td>
+                     <td>59.1 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-aarch64.rpm' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-aarch64.rpm</a></div>
+                     </td>
+                  </tr>
+				  
+				  <tr>
+                     <td>Linux ARM 64 Compressed Archive</td>
+                     <td>70.77 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-aarch64.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-aarch64.tar.gz</a></div>
+                     </td>
+                  </tr>
+				  
+				  <tr>
+                     <td>Linux ARM 32 Hard Float ABI</td>
+                     <td>73.47 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-arm32-vfp-hflt.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-arm32-vfp-hflt.tar.gz</a></div>
+                     </td>
+                  </tr>
+				  
+                  
+                  <tr>
+                     <td>Linux x86 RPM Package</td>
+                     <td>108.46 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-i586.rpm' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-i586.rpm</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x86 Compressed Archive</td>
+                     <td>136.95 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-i586.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-i586.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x64 RPM Package</td>
+                     <td>108.06 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-x64.rpm' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-x64.rpm</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x64 Compressed Archive</td>
+                     <td>137.06 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-linux-x64.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-x64.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>macOS x64</td>
+                     <td>205.26 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-macosx-x64.dmg' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-macosx-x64.dmg</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris SPARC 64-bit (SVR4 package)</td>
+                     <td>125.96 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-sparcv9.tar.Z' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-sparcv9.tar.Z</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris SPARC 64-bit</td>
+                     <td>88.77 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-sparcv9.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-sparcv9.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris x64 (SVR4 package)</td>
+                     <td>134.68 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-x64.tar.Z' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-x64.tar.Z</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris x64</td>
+                     <td>92.66 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-x64.tar.gz' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-x64.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Windows x86</td>
+                     <td>154.69 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-windows-i586.exe' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-windows-i586.exe</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Windows x64</td>
+                     <td>166.97 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09/89d678f2be164786b292527658ca1605/jdk-8u281-windows-x64.exe' data-license='141' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-windows-x64.exe</a></div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="cb133 cb133v0 cpad" data-licenses="/a/ocom/docs/download-licenses.json" data-ocomid="cb133" data-trackas="cb133">
+   <div class="cb133w1 cwidth">
+    <a id="Demos" name="Demos"></a>
+      <h4>Java SE Development Kit 8u271 Demos and Samples Downloads</h4>
+      <p>Demos and samples of common tasks and new functionality available on JDK 8. JavaFX 8 demos and samples are included in the JDK 8 Demos and Samples packages. The source code provided with demos and samples for the JDK is meant to illustrate the usage of a given feature or technique and has been deliberately simplified.</p>
+      <p>This software is licensed under the <a href="https://www.oracle.com/a/tech/docs/oraclebsd-license.html" target="_blank">Oracle BSD License</a></p>
+      <div class="otable otable-scrolling" data-ocomid="otable">
+         <div class="otable-w1">
+            <table class="otable-w2">
+               <thead>
+                  <tr>
+                     <th class="otable-col-head">
+                        <h3>Product / File Description</h3>
+                     </th>
+                     <th class="otable-col-head">
+                        <h3>File Size</h3>
+                     </th>
+                     <th class="otable-col-head">
+                        <h3>Download</h3>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+			   
+			   <tr>
+                     <td>Linux ARM 64 RPM Package</td>
+                     <td>6.93 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-aarch64-demos.rpm' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-aarch64-demos.rpm</a></div>
+                     </td>
+                  </tr>
+				  
+				  <tr>
+                     <td>Linux ARM 64 Compressed Archive</td>
+                     <td>9.2 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-aarch64-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-aarch64-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+			   
+			   
+                  <tr>
+                     <td>Linux ARM 32 Hard Float ABI</td>
+                     <td>9.06 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-arm32-vfp-hflt-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-arm32-vfp-hflt-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+                 
+                  <tr>
+                     <td>Linux x86 RPM Package</td>
+                     <td>44.64 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-i586-demos.rpm' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-i586-demos.rpm</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x86 Compressed Archive</td>
+                     <td>52.5 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-i586-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-i586-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x64 RPM Package</td>
+                     <td>44.7 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-x64-demos.rpm' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-x64-demos.rpm</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Linux x64 Compressed Archive</td>
+                     <td>52.59 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-linux-x64-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-linux-x64-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>macOS</td>
+                     <td>52.84 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-macosx-x86_64-demos.zip' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-macosx-x86_64-demos.zip</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris SPARC 64-bit (SVR4 package)</td>
+                     <td>12.3 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-sparcv9-demos.tar.Z' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-sparcv9-demos.tar.Z</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris SPARC 64-bit</td>
+                     <td>8.46 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-sparcv9-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-sparcv9-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris x64 (SVR4 package)</td>
+                     <td>12.22 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-x64-demos.tar.Z' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-x64-demos.tar.Z</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Solaris x64</td>
+                     <td>8.42 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-solaris-x64-demos.tar.gz' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-solaris-x64-demos.tar.gz</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Windows x86</td>
+                     <td>53.56 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-windows-i586-demos.zip' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-windows-i586-demos.zip</a></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Windows x64</td>
+                     <td>53.58 MB  </td>
+                     <td>
+                        <div class='cb133-download'><a class='license-link icn-download' data-file='https://download.oracle.com/otn/java/jdk/8u281-b09-demos/89d678f2be164786b292527658ca1605/jdk-8u281-windows-x64-demos.zip' data-license='145' href='/downloads/javase-software-license-agreement.html#license-lightbox'>jdk-8u281-windows-x64-demos.zip</a></div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+<!-- / _Raw-Text -->
+
+<!-- U10v0 -->
+
+	<!-- Dispatcher:null -->
+	
+<!-- BEGIN: oWidget_C/_Raw-Text/Display -->
+<!-- U10v0 -->
+<div id="u10" class="u10 u10v6" data-trackas="ffooter" data-ocomid="u10">
+	<div class="u10w1">
+		
+<div class="u10w2">
+<div class="u10w3">
+<h5>Resources for</h5>
+<ul>
+<li><a data-lbl="resources-for:developers" href="https://developer.oracle.com/">Developers</a></li>
+<li><a data-lbl="resources-for:startups" href="/startup/">Startups</a></li>
+<li><a data-lbl="resources-for:students-educators" href="https://academy.oracle.com/en/oa-web-overview.html">Students and Educators</a></li>
+</ul>
+</div>
+</div>
+
+<div class="u10w2">
+<div class="u10w3">
+<h5>Partners</h5>
+<ul>
+<li><a data-lbl="partners:oracle-partnernetwork-ocom" href="/partnernetwork/">Oracle PartnerNetwork</a></li>
+<li><a data-lbl="partners:find-a-partner" href="https://partner-finder.oracle.com/">Find a Partner</a></li>
+<li><a data-lbl="partners:login-opn" href="/opn/index.html">Log in to OPN</a></li>
+</ul>
+</div>
+</div>	
+
+<div class="u10w2">
+<div class="u10w3">
+<h5>Solutions</h5>
+<ul>
+<li><a data-lbl="emerging-technlogy:artificial-intelligence" href="/artificial-intelligence/">Artificial Intelligence</a></li>
+<li><a data-lbl="emerging-technlogy:internet-of-things" href="/internet-of-things/">Internet of Things</a></li>
+<li><a data-lbl="emerging-technlogy:blockchain" href="/blockchain/">Blockchain</a></li>
+</ul>
+</div>
+</div>
+
+<div class="u10w2">
+<div class="u10w3">
+<h5>What&rsquo;s New</h5>
+<ul>
+<li><a data-lbl="whatsnew:covid-19-1002-research" href="/corporate/covid-19/research/" data-cxdtrack=":ow:off:ot:::GFooter100220" data-adbtrack=":ow:off:ot:::GFooter100220">How we&rsquo;re taking on COVID-19</a></li>
+<li><a data-lbl="whatsnew:java-SE-downloads" href="/java/technologies/javase-downloads.html">Java SE Downloads</a></li>
+<li><a data-lbl="whatsnew:cloud-trial" href="/cloud/free/?source=:ow:o:h:nav:050120SiteFooter&intcmp=:ow:o:h:nav:050120SiteFooter">Try Oracle Cloud Free Tier</a></li>
+
+
+</ul>
+</div>
+</div>
+
+
+<div class="u10w2">
+<div class="u10w3">
+<h5>Contact Us</h5>
+<ul>
+<li><a href="tel:18006330738">US Sales: +1.800.633.0738</a></li>
+<li><a data-lbl="contact-us:how-can-we-help" href="/corporate/contact/">How can we help?</a></li>
+<!--<li><a data-lbl="contact-us:support-directory" href="/support/contact.html">Support Directory</a></li>-->
+<li><a data-lbl="contact-us:subscribe-to-emails" href="https://go.oracle.com/subscriptions">Subscribe to emails</a></li>
+</ul>
+</div>
+</div>
+
+<div class="u10w4">
+<hr />
+</div>
+<div class="u10w5" data-trackas="footer">
+<ul class="scl-icons">
+<li class="scl-facebook"><a data-lbl="scl-icon:facebook" href="https://www.facebook.com/Oracle/" title="Oracle on Facebook">Facebook</a></li>
+<li class="scl-twitter"><a data-lbl="scl-icon:twitter" href="https://twitter.com/oracle" title="Follow Oracle on Twitter">Twitter</a></li>
+<li class="scl-linkedin"><a data-lbl="scl-icon:linkedin" href="https://www.linkedin.com/company/oracle/" title="Oracle on LinkedIn">LinkedIn</a></li>
+<li class="scl-youtube"><a data-lbl="scl-icon:you-tube" href="https://www.youtube.com/oracle/" title="Watch Oracle on YouTube">YouTube</a></li>
+</ul>
+
+<div class="u10-ologo"><a data-lbl="integrated-cloud-applications-and-platform-services" href="/">Oracle</a></div>
+<h3>Integrated Cloud Applications &amp; Platform Services</h3>
+
+<ul class="u10-links">
+<li><a data-lbl="copyright" href="/legal/copyright.html">&copy; 2021 Oracle</a></li>
+<li><a data-lbl="site-map" href="/sitemap.html">Site Map</a></li>
+<li><a data-lbl="privacy" href="/legal/privacy/">Privacy</a><span>/</span><a data-lbl="do-not-sell-my-info" href="/legal/privacy/privacy-choices.html">Do Not Sell My Info</a></li>
+<li class="u10mtool" id="u10cmenu"><a data-lbl="country-region" class="u10ticon u10regn" href="/universal-menu/index.html#u10countrymenu">Country/Region</a></li>
+<li><div id="teconsent"></div></li>
+<li><a data-lbl="ad-choices" href="/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html#adchoices">Ad Choices</a></li>
+<li><a data-lbl="careers" href="/corporate/careers/">Careers</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<!-- /U10v0 -->
+
+
+
+<!-- END: oWidget_C/_Raw-Text/Display -->
+
+<!-- /U10v0 -->
+
+		</div>
+		
+<!-- Container/Display Start -->
+
+<!-- _Raw-Text -->
+<!-- www-us EndBodyAdminContainer -->
+<!-- Start SiteCatalyst code -->
+<script language="JavaScript" src="https://www.oracleimg.com/us/assets/metrics/ora_ocom.js"></script>
+<!-- End SiteCatalyst code -->
+
+ <!--DTM embed code - Footer -->
+ <script type="text/javascript">_satellite.pageBottom();</script>
+ <!--End-->
+<!-- www-us EndBodyAdminContainer -->
+
+<!-- / _Raw-Text -->
+
+<!-- Container/Display end -->
+
+	<script type="text/javascript" >var _cf = _cf || []; _cf.push(['_setFsp', true]);  _cf.push(['_setBm', true]);  _cf.push(['_setAu', '/resource/c80120d8bcrn2487b2bc59dd8540619e']); </script><script type="text/javascript"  src="/resource/c80120d8bcrn2487b2bc59dd8540619e"></script></body>
+</html>

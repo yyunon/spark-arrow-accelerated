@@ -17,10 +17,19 @@ class FletcherBenchmark {
 
 //  @Benchmark
   def maxOfsumOf10(blackhole: Blackhole, myState: TestState): Unit = {
-    val res = myState.spark.sql(s""" SELECT SUM(`number`) as `number`
-                                   | FROM parquet.`$rootDir/data/taxi-uncompressed.parquet`
-                                   | WHERE `string` rlike 'Blue Ribbon Taxi Association Inc.' """.stripMargin)
-    blackhole.consume(res.collect())
+    val query =
+      """ select
+          |    sum(`l_extendedprice` * `l_discount`) as `revenue`
+      from
+          |    parquet.`/home/centos/dataset_generation/parquet/1sf/lineitem.parquet`
+      where
+          |    `l_shipdate` >= '19940101'
+          |    and `l_shipdate` < '19950101'
+          |    and `l_discount` between '15466' and '15990'
+          |    and `l_quantity` < '6291456';
+      """.stripMargin
+    val res = myState.spark.sql(query)
+    blackhole.consume(res.collect()(0).getLong(0).toDouble / Math.pow(2.0,18))
   }
 }
 object FletcherBenchmark {
